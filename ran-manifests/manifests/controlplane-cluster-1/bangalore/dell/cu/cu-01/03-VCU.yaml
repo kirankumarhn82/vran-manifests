@@ -78,7 +78,7 @@ spec:
           userData: |-
               #cloud-config
               hostname: rhocp-bangalore-cu-01
-              fqdn: rhocp-vcu01.rma.lan
+              fqdn: rhocp-vcu02.rma.lan
               write_files:
               -   path: /mnt/prov.ini
                   content: |
@@ -88,7 +88,7 @@ spec:
                     ems-fqdn: 10.27.5.101
                     ems-snmp-port: 162
                     oran-support: yes
-                    enb-id: 2001
+                    enb-id: 2002
                     nw-type: nw_type
                     nw-init-method: method
                     mgmt-nics: 56:90:90:01:01:01
