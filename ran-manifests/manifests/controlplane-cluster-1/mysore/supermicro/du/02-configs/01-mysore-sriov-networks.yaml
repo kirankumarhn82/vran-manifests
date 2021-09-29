@@ -9,7 +9,7 @@ metadata:
 spec:
   resourceName: vran_vfio_ar
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 2002
+  #vlan: 2002
   ipam: |-
     {}
   linkState: auto  
@@ -30,7 +30,7 @@ metadata:
 spec:
   resourceName: vran_vfio
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 2001
+  #vlan: 2001
   ipam: |-
     {}
   linkState: auto  
@@ -51,7 +51,7 @@ metadata:
 spec:
   resourceName: vran_netdevice
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 806
+  #vlan: 806
  
   ipam: |-
     {"type": "static"}
@@ -73,7 +73,7 @@ metadata:
 spec:
   resourceName: vran_netdevice_fh
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 2003
+  #vlan: 2003
  
   ipam: |-
     {"type": "static"}
@@ -95,7 +95,7 @@ metadata:
 spec:
   resourceName: vran_netdevice
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 805
+  #vlan: 805
  
   ipam: |-
     {"type": "static"}
@@ -117,7 +117,7 @@ metadata:
 spec:
   resourceName: vran_netdevice
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 803
+  #vlan: 803
   ipam: |-
     {}
   linkState: auto  
@@ -138,7 +138,7 @@ metadata:
 spec:
   resourceName: vran_netdevice
   networkNamespace: altiostar-4g-du-mysore
-  vlan: 804
+  #vlan: 804
   ipam: |-
     {}
   linkState: auto  
