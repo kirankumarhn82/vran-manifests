@@ -1,5 +1,28 @@
  
 ---
+# specific resourceName for it (eg. sriov-netdevice-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: bangalore-sriov-vfio-sb-dell00-server-profile-cu-dell-r640-00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: "vran_vfio_sb"
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/bangalore-sriov-vfio-server-profile-cu-dell-r640-00: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 4
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+          - ens1f0#0-3
+
+
+---
 ###############################################################################
 # specific resourceName for it (eg. sriov-netdevice-smci00)
 apiVersion: sriovnetwork.openshift.io/v1
@@ -20,8 +43,7 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f0#24-31
-          - ens2f1#24-31
+          - ens1f0#4-11
     
 ---
 ###############################################################################
@@ -44,7 +66,7 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f0#10-20
+          - ens1f0#12-19
     
 ---
 ###############################################################################
@@ -67,5 +89,5 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f0#0-9
+          - ens1f0#20-27
     
