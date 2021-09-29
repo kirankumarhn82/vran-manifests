@@ -1,3 +1,23 @@
+---
+###############################################################################
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: bangalore-vran-sb
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_sb
+  networkNamespace: altiostar-4g-cu-bangalore
+  #vlan: 805
+  ipam: '{"type": "static"}'
+  linkState: auto
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>
+
  
 ---
 ###############################################################################
@@ -9,7 +29,7 @@ metadata:
 spec:
   resourceName: vran_vfio_fh
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 2003
+  #vlan: 2003
   ipam: |-
     {}
   linkState: auto  
@@ -30,7 +50,7 @@ metadata:
 spec:
   resourceName: vran_vfio
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 805
+  #vlan: 805
   ipam: |-
     {}
   linkState: auto  
@@ -51,7 +71,7 @@ metadata:
 spec:
   resourceName: vran_vfio_a
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 806
+  #vlan: 806
   ipam: |-
     {}
   linkState: auto  
@@ -72,7 +92,7 @@ metadata:
 spec:
   resourceName: vran_vfio_b
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 806
+  #vlan: 806
   ipam: |-
     {}
   linkState: auto  
@@ -93,7 +113,7 @@ metadata:
 spec:
   resourceName: vran_vfio_a
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 803
+  #vlan: 803
   ipam: |-
     {}
   linkState: auto  
@@ -114,7 +134,7 @@ metadata:
 spec:
   resourceName: vran_vfio_b
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 803
+  #vlan: 803
   ipam: |-
     {}
   linkState: auto  
@@ -135,7 +155,7 @@ metadata:
 spec:
   resourceName: vran_vfio_a
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 804
+  #vlan: 804
   ipam: |-
     {}
   linkState: auto  
@@ -156,7 +176,7 @@ metadata:
 spec:
   resourceName: vran_vfio_b
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 804
+  #vlan: 804
   ipam: |-
     {}
   linkState: auto  
@@ -177,7 +197,7 @@ metadata:
 spec:
   resourceName: vran_vfio
   networkNamespace: altiostar-4g-cu-bangalore
-  vlan: 3005
+  #vlan: 3005
   ipam: |-
     {}
   linkState: auto  
