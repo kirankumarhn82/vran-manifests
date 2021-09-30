@@ -44,3 +44,4 @@ spec:
     namespace: argocd
     jsonPointers:
     - /spec/source
+    
