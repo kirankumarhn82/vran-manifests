@@ -107,11 +107,11 @@ spec:
           name: nic1
   
         - multus:
-            networkName: bangalore-vran-mh
+            networkName: bangalore-vran-mh-a
           name: nic2
   
         - multus:
-            networkName: bangalore-vran-bh-s1c
+            networkName: bangalore-vran-bh-s1c-a
           name: nic3
   dataVolumeTemplates:
   - metadata:
