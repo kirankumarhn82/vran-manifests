@@ -4,8 +4,6 @@ kind: Job
 metadata:
   annotations:
     # argocd.argoproj.io/sync-wave: "30"
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
   name: scc-job-du-mysore-server-profile-du-supermicro00
   namespace: argocd
 spec:

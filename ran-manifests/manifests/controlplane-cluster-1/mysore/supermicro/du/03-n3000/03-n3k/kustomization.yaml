@@ -4,6 +4,6 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-options: Prune=false
   argocd.argoproj.io/compare-options: IgnoreExtraneous 
+  
 resources:
-  - 01-n3000snp-wait-n3kop-job.yaml
   - 01-install-n3000.yaml

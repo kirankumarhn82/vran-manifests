@@ -12,8 +12,6 @@ commonLabels:
     # argocd.argoproj.io/compare-options: IgnoreExtraneous
 
 resources:
-  - 00-hook-mcp-wait-job-mysore.yaml
-  - 00-hook-sriovnodepolicy-wait-job-mysore.yaml
   - 00-scc-privileged-job-mysore.yaml  
   - 01-Namespace.yaml
   - 02-ConfigMap-Common.yaml

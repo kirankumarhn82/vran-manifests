@@ -11,5 +11,4 @@ commonAnnotations:
   argocd.argoproj.io/compare-options: IgnoreExtraneous
 
 resources:
-  - 00-hook-mcp-wait-job-bangalore.yaml
   - 01-config-scratchspace.yaml

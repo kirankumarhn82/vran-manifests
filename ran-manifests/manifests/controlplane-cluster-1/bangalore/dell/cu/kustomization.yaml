@@ -11,9 +11,15 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: Prune=false
   argocd.argoproj.io/compare-options: IgnoreExtraneous  
 
+bases:
+  - ./00-pre  
+  - ./01-post
+  - ./02-settings
+  - ./02-virt
+  - ./cu-01 
+
 
 resources:
   - 00-worker-1-cu-labels-job.yaml
-
   - 00-wait-job-sa-role.yaml
   - 01-mcp-wait-job-sa-rolebinding.yaml

@@ -8,7 +8,6 @@ commonLabels:
 
 resources:
   # SRIOV Configs
-  - 00-hook-mcp-wait-job-mysore.yaml
   - 00-mysore-sriov-namespace.yaml
   - 00-mysore-sriov-node-policy.yaml
   - 01-mysore-sriov-networks.yaml
