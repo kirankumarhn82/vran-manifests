@@ -15,9 +15,9 @@ bases:
   - ./00-pre  
   - ./01-post
   - ./02-configs
-  - ./03-n3000/03-n3k
+#  - ./03-n3000/03-n3k
   - ./03-n3000/n3k-cluster
-  - ./03-n3000/n3k-sriov
+#  - ./03-n3000/n3k-sriov
   - ./03-n3000/sriovfec-clusterconfig    
   - ./04-timingmgr
   - ./du-01
