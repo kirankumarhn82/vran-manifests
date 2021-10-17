@@ -13,7 +13,7 @@ commonLabels:
 
 resources:
   - 00-scc-privileged-job-mysore.yaml  
-  - 01-Namespace.yaml
+#  - 01-Namespace.yaml
   - 02-ConfigMap-Common.yaml
   - 02-ConfigMap-InitScripts.yaml
   - 02-ConfigMap-ProvIni-p1.yaml
