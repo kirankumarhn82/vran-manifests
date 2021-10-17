@@ -17,4 +17,4 @@ resources:
   
   - 02-tuned-ran-cu-bangalore-server-profile-cu-dell-r640-00.yaml
   - 03-mc-fixrps-ran-cu-bangalore-server-profile-cu-dell-r640-00-pao-profile-cu-dell-r640-00.yaml
-  - 04-deploy-openshift-virt.yaml
+#  - 04-deploy-openshift-virt.yaml

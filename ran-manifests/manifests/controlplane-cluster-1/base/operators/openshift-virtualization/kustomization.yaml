@@ -9,3 +9,4 @@ commonAnnotations:
 
 resources:
 - 01-install.yaml
+- 04-deploy-openshift-virt.yaml
