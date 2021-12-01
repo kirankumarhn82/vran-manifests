@@ -1,0 +1,49 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  name: master-dell-44-ocp48-qa-custom-role
+rules:
+- apiGroups:
+  - agent-install.openshift.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: master-dell-44-ocp48-qa-custom-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: master-dell-44-ocp48-qa-custom-role
+subjects:
+  - kind: ServiceAccount
+    name: master-dell-44-ocp48-qa-argocd-application-controller
+    namespace: master-dell-44-ocp48-qa
+  - kind: ServiceAccount
+    name: master-dell-44-ocp48-qa-argocd-server
+    namespace: master-dell-44-ocp48-qa
+---
+# WARNING: ONLY USE THIS FOR MANAGING CLUSTERS NOT FOR REGULAR USERS
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: master-dell-44-ocp48-qa-cluster-admin-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: master-dell-44-ocp48-qa-argocd-application-controller
+    namespace: master-dell-44-ocp48-qa
+  # NOTE: THIS INSTANCE IT IS ONLY FOR CLUSTER ADMINS
+  - kind: ServiceAccount
+    name: master-dell-44-ocp48-qa-argocd-server
+    namespace: master-dell-44-ocp48-qa    
+    
