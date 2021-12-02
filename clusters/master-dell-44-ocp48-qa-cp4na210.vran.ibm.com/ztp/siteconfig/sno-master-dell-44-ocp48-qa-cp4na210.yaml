@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "master-dell-44-ocp48-qa-cp4na210"
+  namespace: "master-dell-44-ocp48-qa-cp4na210"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.8.18"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzlS2D9ovo4gviE5Xs7KAFc5ZkYA7HNgXvB1DGE6Gvg2GGBtWvBQCa8M/gInZIwFoBpgqaxCuKc0CWtDmmmuVHreX80WCKtJD+Iyw9wor9JqAgnNwk/tPzBcSgSade5HMwLJQGXkaKBVLy5VLHYEnCF78QC7dkuGyg/QCzMqPnj1Nh26V+hKOnjcXAz1s2gMewR2fEhMAjyhjcREhxVCrFtZRKYrraW79V61G7gvWOK3cmhbKuGRUJP69zpBpxoIhR2xQbR841vvRN0/k1aliDVevxL14Syqgi6i873pNbbd5XZks9n40EwA4eQBidZKVfc9qukoa8/7P5L/y8BOJT"
+  clusters:
+  - clusterName: "master-dell-44-ocp48-qa-cp4na210"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "master-dell-44-ocp48-qa-cp4na210"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "master-dell-44-ocp48-qa-cp4na210.master-dell-44-ocp48-qa-cp4na210.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1"
+         bmcCredentialsName:
+           name: "master-dell-44-ocp48-qa-cp4na210-master-dell-44-ocp48-qa-cp4na210-bmh-secret"
+         bootMACAddress: "78:AC:44:22:9B:74"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:22:9B:74"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:22:9B:74"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
