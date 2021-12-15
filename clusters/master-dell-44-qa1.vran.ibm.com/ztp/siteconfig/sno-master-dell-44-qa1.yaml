@@ -7,8 +7,8 @@ spec:
   baseDomain: "vran.ibm.com"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "vran-ocp-v4.8.18"
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJWsJyNXV2O7aIz02TU/NwFSl+jymdidVqmHbB+E8i33lLar8rpoVzz89KLNvlB26onUzMH0F08dsztLq+x6GovhVkTx3exc8hWYC88A6CxMeAqBl3Hs6D1IYfnFQFtWD9/hMihqf+AF+sRCKQFXnPxYGE3xFwOW6nHSaRnjjcy81OgzrHC6PpSFZIQWwZT+7bBcGz5dShFjs0MiMlhSV0HjAj76+NyJQBrwY7gVQnEEYcsdLqM2qzvCEsTfivI0Ol049tVCZdu38B+RiqSO+qaOCto6pWpDnNKLEkBEULnrC4iaPfF1Af5VhbwSYO6C9o5gPRp/WWj2H1aB/t+GhN"
+  clusterImageSetNameRef: "vran-ocp-4.8.18" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTQuchmHJzV7/GIzWELfTDDyHt0VBrk5e1kFA+BUQZvXAfX2ccKe5+rggMU+8y2QJ/ErTC3+98m4bvrbmLzeolJB3QAfnsR7pQ+gZnE2RP25Vi8OUkCudAUDQFAlkevC9CVcGTdU712QSWH6wIuLhrRe9lLwTJZAA7Xzjy4a9krzJL26FPeebejpf9m6ZfBMjz9vXPp6Bl0gXucethJ4d8VjeRvLHW2cJf6q6gOqGCflVnzG7tqmuofjgqWaXcE15E9UAjKclrnzcjuqp/nktul9NVbZCjmVV772DHkpItvXf/XKeAwbjYXzHtDJBWZfLRBtblgbFUowvLgxNuCzfj"
   clusters:
   - clusterName: "master-dell-44-qa1"
     clusterType: "sno"
@@ -25,8 +25,8 @@ spec:
     machineNetwork:
        - cidr: 9.37.195.0/24
     nodes:
-       - hostName: "master-dell-44-qa1.master-dell-44-qa1.vran.ibm.com"
-         bmcAddress: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1"
+       - hostName: "master-dell-44-qa1"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1" 
          bmcCredentialsName:
            name: "master-dell-44-qa1-master-dell-44-qa1-bmh-secret"
          bootMACAddress: "78:AC:44:22:9B:74"
