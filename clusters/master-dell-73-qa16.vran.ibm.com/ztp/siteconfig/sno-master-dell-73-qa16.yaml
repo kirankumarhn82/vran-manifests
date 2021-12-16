@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "master-dell-73-qa16"
+  namespace: "master-dell-73-qa16"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.8.18-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/5YPBWWg2iXUXNGN73NwaV0TzIYpO+2yfZCsXc4Zet2sO3fVmNYGMk/F1Xdc8C2bpd0cCSMuwBlZkkSMqhb4qCF9T0KHlYGhStgsBRmgK8eJuZzrz4s1V2hSfNVvpDMSTZKgcvrEAL5YdJy4SJH+QHrzamX7vKrxGNhncv8F5lCjHfKw39fPDcs6fkEtIZOmTCPlYvrPNcJ/nDjA3H6ST6ke8gD0scw6JrBFY69sG/UwY5ZmMVuhHnhek/aNzb1Wn0Gm+5eCt3rGIORHZ0u3VWFNoWpKYYIVfrI2SoXG6E/lGwd/5n/BjGe5nDAU8qFiYOdfas/8jTD90qoViU161"
+  clusters:
+  - clusterName: "master-dell-73-qa16"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "master-dell-73-qa16"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "master-dell-73-qa16"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.73/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "master-dell-73-qa16-master-dell-73-qa16-bmh-secret"
+         bootMACAddress: "78:AC:44:32:7A:D0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:32:7A:D0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:32:7A:D0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
