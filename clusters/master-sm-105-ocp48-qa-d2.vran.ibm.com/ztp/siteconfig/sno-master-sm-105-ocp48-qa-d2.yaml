@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "master-sm-105-ocp48-qa-d2"
+  namespace: "master-sm-105-ocp48-qa-d2"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.8.18-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpJlVKWxFbQxCbwLLGdYRMd5S8UjZs3bXfpOgEBMZ29r9bMaW4CC/9n2fNtnjo8yVhbiwXDLX6TORFAFIFYFsqqffRktd54YiaTyaHtN+FleTlFJ24L2pzZetigU3ezuD7cef+JAubx0JfNxRx3sa0oJFgiw5kpllpugBov5r/4k7DeWSIy3jVeBrrrHERjE58+WMIRCuNMSssMf4ba1UiZ7LoQjWfcx3UdS3VyMv+mAwmPiwZzh4FrA6U0ATUWi8tjXTNAQkMHI4eES1Y4YkMjbvoWKlVHmehiTxgcR+dAOg1YMv9gD2bDFLx+eT8dmEM20OFG1BD/nfnZl51dJ1L"
+  clusters:
+  - clusterName: "master-sm-105-ocp48-qa-d2"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "master-sm-105-ocp48-qa-d2"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "master-sm-105-ocp48-qa-d2"
+         bmcAddress: "redfish-virtualmedia+https://9.37.131.105/redfish/v1/Systems/1" 
+         bmcCredentialsName:
+           name: "master-sm-105-ocp48-qa-d2-master-sm-105-ocp48-qa-d2-bmh-secret"
+         bootMACAddress: "3C:EC:EF:5E:3C:0C"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "3C:EC:EF:5E:3C:0C"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "3C:EC:EF:5E:3C:0C"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
