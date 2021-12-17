@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: master-sm-101-ocp48-qa-d2.vran.ibm.com-gitops
+  namespace: openshift-gitops
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+#    namespace: test-sno-siteconfig
+  project: default
+  source:
+    path: clusters/master-sm-101-ocp48-qa-d2.vran.ibm.com/ztp/gitops
+    repoURL: https://github.com/kirankumarhn82/vran-manifests.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
