@@ -1,0 +1,6 @@
+{
+    "application-name": "banglore-master-73-ocp48-xnf-labelling",
+    "cluster-name": "master-73-ocp48-xnf.vran.ibm.com",
+    "cluster-address": "https://api.master-73-ocp48-xnf.vran.ibm.com:6443",
+    "path": "clusters/master-73-ocp48-xnf.vran.ibm.com/sites/banglore/master-73-ocp48-xnf/configs-labelling"
+}
