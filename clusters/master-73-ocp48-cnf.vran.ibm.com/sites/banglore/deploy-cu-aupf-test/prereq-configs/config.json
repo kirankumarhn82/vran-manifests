@@ -1,6 +1,0 @@
-{
-    "application-name": "banglore-aupf-test",
-    "cluster-name": "master-73-ocp48-cnf.vran.ibm.com",
-    "cluster-address": "https://api.master-73-ocp48-cnf.vran.ibm.com:6443",
-    "path": "clusters/master-73-ocp48-cnf.vran.ibm.com/sites/banglore/deploy-cu-aupf-test/prereq-configs"
-}
