@@ -7,7 +7,7 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: Samsung-xnf:1.0
+  name: vran-serviceaccount
   namespace: cnf
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -33,7 +33,7 @@ roleRef:
   name: vzw-role
 subjects:
   - kind: ServiceAccount
-    name: Samsung-xnf:1.0
+    name: vran-serviceaccount
     namespace: cnf
 
 ---
@@ -48,5 +48,5 @@ roleRef:
   name: system:openshift:scc:privileged
 subjects:
 - kind: ServiceAccount
-  name: Samsung-xnf:1.0
+  name: vran-serviceaccount
   namespace: cnf
