@@ -10,3 +10,4 @@ spec:
   enableInjector: true
   enableOperatorWebhook: true
   logLevel: 2
+  disableDrain: true
