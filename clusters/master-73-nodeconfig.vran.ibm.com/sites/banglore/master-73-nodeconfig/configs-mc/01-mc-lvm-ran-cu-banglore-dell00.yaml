@@ -5,6 +5,8 @@ metadata:
   name: ran-cu-banglore-dell00-lvs
   labels:
     machineconfiguration.openshift.io/role: ran-cu-banglore-dell00
+    machineconfiguration.openshift.io/role: ran
+    machineconfiguration.openshift.io/role: worker
 spec:
   config:
     ignition:
