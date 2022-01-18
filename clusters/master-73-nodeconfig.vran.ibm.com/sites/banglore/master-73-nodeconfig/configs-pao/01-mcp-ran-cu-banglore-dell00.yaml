@@ -11,7 +11,7 @@ spec:
       - {
           key: machineconfiguration.openshift.io/role,
           operator: In,
-          values: [worker, ran, ran-cu-banglore-dell00],
+          values: [ran-cu-banglore-dell00],
         }    
   paused: false
   nodeSelector:
