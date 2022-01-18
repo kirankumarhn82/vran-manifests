@@ -15,5 +15,5 @@ resources:
   - 00-label-wait-job-banglore-master-73-nodeconfig-pao.yaml
 
   - 00-pao-wait-job-banglore-master-73-nodeconfig.yaml
-  - 01-mcp-ran-cu-banglore-dell00.yaml
+ # - 01-mcp-ran-cu-banglore-dell00.yaml
   - 02-pao-ran-cu-banglore-dell00-profile0.yaml
