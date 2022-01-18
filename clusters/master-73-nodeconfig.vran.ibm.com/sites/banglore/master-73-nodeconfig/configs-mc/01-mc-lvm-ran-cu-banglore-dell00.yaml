@@ -28,7 +28,7 @@ spec:
             Type=oneshot
             RemainAfterExit=yes
             EnvironmentFile=
-            ExecStart=/bin/bash -c "/usr/local/bin/create-lvs-for-lso.sh sdb 5 100"
+            ExecStart=/bin/bash -c "/usr/local/bin/create-lvs-for-lso.sh sda 5 100"
             [Install]
             WantedBy=multi-user.target
           enabled: true
