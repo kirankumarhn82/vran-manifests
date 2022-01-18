@@ -4,7 +4,7 @@ kind: MachineConfig
 metadata:
   name: ran-cu-banglore-dell00-lvs
   labels:
-    machineconfiguration.openshift.io/role: master
+    machineconfiguration.openshift.io/role: ran-cu-banglore-dell00
 spec:
   config:
     ignition:
