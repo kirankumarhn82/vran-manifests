@@ -1,6 +1,0 @@
-{
-    "application-name": "banglore-master-73-xnf-issue-sriov",
-    "cluster-name": "master-73-xnf-issue.vran.ibm.com",
-    "cluster-address": "https://api.master-73-xnf-issue.vran.ibm.com:6443",
-    "path": "clusters/master-73-xnf-issue.vran.ibm.com/sites/banglore/master-73-xnf-issue/configs-sriov"
-}
