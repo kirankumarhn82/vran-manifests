@@ -1,6 +1,0 @@
-{
-    "application-name": "banglore-master-73-nodeconfig-pao",
-    "cluster-name": "master-73-nodeconfig.vran.ibm.com",
-    "cluster-address": "https://api.master-73-nodeconfig.vran.ibm.com:6443",
-    "path": "clusters/master-73-nodeconfig.vran.ibm.com/sites/banglore/master-73-nodeconfig/configs-pao"
-}
