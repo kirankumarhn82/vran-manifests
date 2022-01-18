@@ -14,5 +14,5 @@ commonAnnotations:
 resources:
   - 00-label-wait-job-banglore-master-73-nodeconfig-mc.yaml
 
-  - 00-mcp-wait-job-banglore-master-73-nodeconfig-mc.yaml  
+#  - 00-mcp-wait-job-banglore-master-73-nodeconfig-mc.yaml  
   - 01-mc-lvm-ran-cu-banglore-dell00.yaml
