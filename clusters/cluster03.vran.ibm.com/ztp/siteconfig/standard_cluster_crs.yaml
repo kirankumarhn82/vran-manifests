@@ -99,7 +99,9 @@ spec:
   bmc:
     address: "idrac-virtualmedia://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
     disableCertificateVerification: true
-    credentialsName: cluster03-master-dell-80-bmh-secret
+    password: dG5jTEBiMW1tIQ==
+    username: cm9vdA==
+    #credentialsName: cluster03-master-dell-80-bmh-secret
   bootMACAddress: E4:43:4B:F0:E3:00
   automatedCleaningMode: disabled
   online: true
