@@ -118,7 +118,7 @@ metadata:
 spec:
   bootMode: "UEFI"
   bmc:
-    address: "idrac-virtualmedia+http://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    address: "idrac-virtualmedia://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
     disableCertificateVerification: true
     credentialsName: cluster03-master-dell-81-bmh-secret
   bootMACAddress: E4:43:4B:F1:01:10
