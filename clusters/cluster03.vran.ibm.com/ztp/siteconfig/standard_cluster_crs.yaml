@@ -106,25 +106,25 @@ spec:
   automatedCleaningMode: disabled
   online: true
 ---
-apiVersion: metal3.io/v1alpha1
-kind: BareMetalHost
-metadata:
-  name: "master-dell-81"
-  namespace: cluster03
-  annotations:
-    inspect.metal3.io: disabled
-  labels:
-    infraenvs.agent-install.openshift.io: "cluster03"
-spec:
-  bootMode: "UEFI"
-  bmc:
-    address: "idrac-virtualmedia://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
-    disableCertificateVerification: true
-    credentialsName: cluster03-master-dell-81-bmh-secret
-  bootMACAddress: E4:43:4B:F1:01:10
-  automatedCleaningMode: disabled
-  online: true
----
+#apiVersion: metal3.io/v1alpha1
+#kind: BareMetalHost
+#metadata:
+  #name: "master-dell-81"
+  #namespace: cluster03
+  #annotations:
+    #inspect.metal3.io: disabled
+  #labels:
+    #infraenvs.agent-install.openshift.io: "cluster03"
+#spec:
+  #bootMode: "UEFI"
+  #bmc:
+    #address: "idrac-virtualmedia://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    #disableCertificateVerification: true
+    #credentialsName: cluster03-master-dell-81-bmh-secret
+  #bootMACAddress: E4:43:4B:F1:01:10
+  #automatedCleaningMode: disabled
+  #online: true
+#---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
