@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: cluster05
+  namespace: cluster05
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: cluster05
+    version: v1beta1
+  clusterName: cluster05
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: cluster05
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: cluster05
+  namespace: cluster05
+spec:
+  apiVIP: 9.37.195.12
+  ingressVIP: 9.37.195.15
+  clusterDeploymentRef:
+    name: cluster05
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWyQnSsGZUGdyRU2J8In1ohfAwnesWYVfuy83IrBwCNTM8axJQhTRt/EPb6um2yFSZ8mZu/gUz7juwV759OpuoxOu4VRdicc6MMaTtoEaEsF7rSoSeMSADuol756o99jpf1nZx3UVyrRk/W+zlUkz4Jq+f+G+uQ/Hz41Spy5M9c2GvsqkY3YrAeCMckb9ZirwR/Up/HOodH1a1P7ia1uvCIh/COnW6Yfcj+N+vlZsdXbykqpe7ght7APp7T6hi+oapYNvXjyUFni56FLGCTaoZn7NBqcAvbbby8CiWDZGfwaKdWRkufvc9RXgqqmgEbA6p7NTldE5u5tWvnrcVOemr"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: cluster05
+  namespace: cluster05
+spec:
+  clusterName: cluster05
+  clusterNamespace: cluster05
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: cluster05
+  namespace: cluster05
+  
+spec:
+  clusterRef:
+    name: cluster05
+    namespace: cluster05
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: cluster05
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWyQnSsGZUGdyRU2J8In1ohfAwnesWYVfuy83IrBwCNTM8axJQhTRt/EPb6um2yFSZ8mZu/gUz7juwV759OpuoxOu4VRdicc6MMaTtoEaEsF7rSoSeMSADuol756o99jpf1nZx3UVyrRk/W+zlUkz4Jq+f+G+uQ/Hz41Spy5M9c2GvsqkY3YrAeCMckb9ZirwR/Up/HOodH1a1P7ia1uvCIh/COnW6Yfcj+N+vlZsdXbykqpe7ght7APp7T6hi+oapYNvXjyUFni56FLGCTaoZn7NBqcAvbbby8CiWDZGfwaKdWRkufvc9RXgqqmgEbA6p7NTldE5u5tWvnrcVOemr"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-80"
+  namespace: cluster05
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster05"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster05-master-dell-80-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-81"
+  namespace: cluster05
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster05"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster05-master-dell-81-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-82"
+  namespace: cluster05
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster05"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster05-master-dell-82-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
