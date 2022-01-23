@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: cluster123
+  namespace: cluster123
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: cluster123
+    version: v1beta1
+  clusterName: cluster123
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: cluster123
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: cluster123
+  namespace: cluster123
+spec:
+  apiVIP: 9.37.195.12
+  ingressVIP: 9.37.195.15
+  clusterDeploymentRef:
+    name: cluster123
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoMcbjBWX7myHRV2flYBtnYJMZuuk63EiQVx62bAy+FCAc1pfn94cUqLAkl1d/U1ate/fvBuAoBgmAMsWI9GNOqZztv49SHw2057Ze7VF/rXJbYWtDi1LYbYjWI+cpqDk43+lRBvh6iyHuE7ckbG67aWHZTmuQ9kT+OHav/m6vA242b6uEMHfFtS1UwRa4arHKcDvXcvcY3a10zbUvhBwDz9UGiDZN24ksBxfdiXvAGA9Ue8SOrLZm8CLw9n2jIuRxrDIBp+aLiwXucOthf+c1CKWBS27aHEhtAyP7n7F428pVuRyeTci52v+71rm/sy2DCMdy239Zia/pBDPhzZPD"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: cluster123
+  namespace: cluster123
+spec:
+  clusterName: cluster123
+  clusterNamespace: cluster123
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: cluster123
+  namespace: cluster123
+  
+spec:
+  clusterRef:
+    name: cluster123
+    namespace: cluster123
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: cluster123
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoMcbjBWX7myHRV2flYBtnYJMZuuk63EiQVx62bAy+FCAc1pfn94cUqLAkl1d/U1ate/fvBuAoBgmAMsWI9GNOqZztv49SHw2057Ze7VF/rXJbYWtDi1LYbYjWI+cpqDk43+lRBvh6iyHuE7ckbG67aWHZTmuQ9kT+OHav/m6vA242b6uEMHfFtS1UwRa4arHKcDvXcvcY3a10zbUvhBwDz9UGiDZN24ksBxfdiXvAGA9Ue8SOrLZm8CLw9n2jIuRxrDIBp+aLiwXucOthf+c1CKWBS27aHEhtAyP7n7F428pVuRyeTci52v+71rm/sy2DCMdy239Zia/pBDPhzZPD"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-42-std"
+  namespace: cluster123
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster123"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.42/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster123-master-dell-42-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:E9:2C
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-80-std"
+  namespace: cluster123
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster123"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster123-master-dell-80-std-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-81-std"
+  namespace: cluster123
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "cluster123"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: cluster123-master-dell-81-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
