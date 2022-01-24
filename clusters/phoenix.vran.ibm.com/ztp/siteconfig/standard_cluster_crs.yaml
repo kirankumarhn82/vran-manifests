@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: phoenix
+  namespace: phoenix
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: phoenix
+    version: v1beta1
+  clusterName: phoenix
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: phoenix
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: phoenix
+  namespace: phoenix
+spec:
+  apiVIP: 9.37.195.12
+  ingressVIP: 9.37.195.15
+  clusterDeploymentRef:
+    name: phoenix
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDha10SJdVq8A4ySzo5zvtHhCore08ga0AUr+Z3j65sDGvRVLzuLYP5AESJZS0VCiMiy/Mc9oyi5jgpHZuKmpaAxfe5ylqremGonZHNUL4ywSF2Gf9DXJfKYNSqw3br64nzwLq1BYQdtpRFN5Mcc9LUq2SP63TRKj+npSZnVPeGcdjbn4Q+IDiRDPILnagDUg1BAF0aJ23ySvPizcSJ8HTACrFQzNu1taTaBH5R4MMmYbHmJNYkuJ0K0EYlLUdl+qkSQmnDMNn+QWrPKS4uNVWOi8sxfufEgX9YRYZUUeh4XcLFEEFuIVhf4+2J5k6jmPI4KzTLu3qkL2USWKlIXf8J"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: phoenix
+  namespace: phoenix
+spec:
+  clusterName: phoenix
+  clusterNamespace: phoenix
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: phoenix
+  namespace: phoenix
+  
+spec:
+  clusterRef:
+    name: phoenix
+    namespace: phoenix
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: phoenix
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDha10SJdVq8A4ySzo5zvtHhCore08ga0AUr+Z3j65sDGvRVLzuLYP5AESJZS0VCiMiy/Mc9oyi5jgpHZuKmpaAxfe5ylqremGonZHNUL4ywSF2Gf9DXJfKYNSqw3br64nzwLq1BYQdtpRFN5Mcc9LUq2SP63TRKj+npSZnVPeGcdjbn4Q+IDiRDPILnagDUg1BAF0aJ23ySvPizcSJ8HTACrFQzNu1taTaBH5R4MMmYbHmJNYkuJ0K0EYlLUdl+qkSQmnDMNn+QWrPKS4uNVWOi8sxfufEgX9YRYZUUeh4XcLFEEFuIVhf4+2J5k6jmPI4KzTLu3qkL2USWKlIXf8J"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-80-std"
+  namespace: phoenix
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenix"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenix-master-dell-80-std-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-81-std"
+  namespace: phoenix
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenix"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenix-master-dell-81-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-82-std"
+  namespace: phoenix
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenix"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenix-master-dell-82-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
