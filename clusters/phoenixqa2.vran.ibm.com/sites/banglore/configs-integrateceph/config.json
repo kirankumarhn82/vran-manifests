@@ -1,6 +1,0 @@
-{
-    "application-name": "banglore-integrateceph",
-    "cluster-name": "phoenixqa2.vran.ibm.com",
-    "cluster-address": "https://api.phoenixqa2.vran.ibm.com:6443",
-    "path": "clusters/phoenixqa2.vran.ibm.com/sites/banglore/configs-integrateceph"
-}
