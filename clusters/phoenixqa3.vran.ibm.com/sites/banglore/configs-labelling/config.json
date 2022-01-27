@@ -1,0 +1,6 @@
+{
+    "application-name": "banglore-labelling",
+    "cluster-name": "phoenixqa3.vran.ibm.com",
+    "cluster-address": "https://api.phoenixqa3.vran.ibm.com:6443",
+    "path": "clusters/phoenixqa3.vran.ibm.com/sites/banglore/configs-labelling"
+}
