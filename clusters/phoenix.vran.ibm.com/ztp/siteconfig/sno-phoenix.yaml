@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5gX5selwmhzYn0QPSD246COllUtnu/Kvet45y7XDIjhTyikLaf+8mo6OimDy/N6zkdxYpbCCW2Zg3dHwhfIaEMNLIzV/ZDEVHEXpPVKDPKIOCS9G/pbBlbYFZHyca4sD1o8wQt0Y1OqO7zcwxk+Ed/jAe30aFv/OKfgNRDYPn3ITQIyttZzCzPGzVScZMuwMpa+cCiKPZ04WUn67IUtv+AEswu1L+7tL3yMIYZRZmLrGaz9DaXnY23Q80CRYz5oruGGw1D6r3VnKlc9TT7Sg5E5h8r4OhkNWReOAuAoPOrnfi66D3S2hVThXla3CDuWChVCARRVJc4b9qOuXM7p6H"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2w5sFIRQmzcHYcSxQ6167KvPzG2OfnYmyMcDUPpKl3lkGKNuEPZ/ZoJyj0vcwc2ABt9gkjvqpTonx3d80WCWNeJN7hnAwULwU3Lpabgrx9/i9kXSM1HKzjgJ+amHWS50Yb1bmuAxkQzGJc0OG3thK1aIsP9bKbaBfCTbtAh3sL2wnYn2sW6KUjZk1W4l6d0Xc9PZxmzTCgRyFP91Rjuawtol4x9dQycXHACA8wpbQFasGaXwlaofqKgzq1urLBqWclNgcUSmXm7L6e0uMWHzOde19DPqS38cXATkiwGYmmOrPfZxnVOwijN/Qa21EeToy3Ce1hVg574YAhY/LWmIp"
   clusters:
   - clusterName: "phoenix"
     clusterType: "standard"
