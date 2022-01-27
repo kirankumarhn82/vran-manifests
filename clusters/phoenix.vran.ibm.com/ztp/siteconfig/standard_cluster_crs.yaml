@@ -42,7 +42,7 @@ spec:
       hostPrefix: 23
     serviceNetwork:
     - 172.30.0.0/16
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSf/SGEoUvAngKvfpKD/+Fhf346Ax5WodWaeTStJtXYWeR4FRsAlCEujHyRpzMrI2KK+pcBVz621W2/XpZavYYZ/wRRfTz+OmoNDiwXMDuzi9FwfPvbZ6KVO/zlcb8lSb1ePNNe8yNSCDgahEy/+fEnevn4U0x3Ve72n1uaeqlDEOMVH9qTLFsow0qI0zKdLtDrEssfffiBKJlwXacHJBiNsxJ/cwwQ6E9J5r4dxdi5G/NpYYyJiv6M5NDSJrzRPPnPnBimIoYDsol7VL45msG1rrYacWCnyPGvlc75FCZvhhNkQsRM0NCjit7dMZOIFzTCn5RFo0FFfkvhwFpI4iz"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL+EwFyYFEtmbakmPJ4en1n3UcQSkCXL63aJnY6TJvuS1sO/FcG2CIx+2ODk3mM0TE+j5uHQ0jPRUpGZlSh+ADRVhdv9tBIZqdANFngIC1ltJNXfrW8w9KJv9Ak90/bFosdVuxOgL6ytUC6ODc/qYfaaxQ169wPclurxBks1gDKMiSQXOFYOyhIeU6q7tRxIfIcWg6gyioM/YhqJ9XQ9zfD29xU7F+UQNdBz4W6ZrVpkdHxhcnOT36CncVo9oGlvo6fvQ27NJ3VdQK+cMtU5UAXSKUKPdG4HzZ3l8+z2GTt0d9WKXcfQTFfplmOxUW30uzB8viENkvEeWYfly01q11"
 
 ---
 apiVersion: agent.open-cluster-management.io/v1
@@ -83,7 +83,7 @@ spec:
   #     cluster-name: phoenix
   pullSecretRef:
     name: assisted-deployment-pull-secret
-  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSf/SGEoUvAngKvfpKD/+Fhf346Ax5WodWaeTStJtXYWeR4FRsAlCEujHyRpzMrI2KK+pcBVz621W2/XpZavYYZ/wRRfTz+OmoNDiwXMDuzi9FwfPvbZ6KVO/zlcb8lSb1ePNNe8yNSCDgahEy/+fEnevn4U0x3Ve72n1uaeqlDEOMVH9qTLFsow0qI0zKdLtDrEssfffiBKJlwXacHJBiNsxJ/cwwQ6E9J5r4dxdi5G/NpYYyJiv6M5NDSJrzRPPnPnBimIoYDsol7VL45msG1rrYacWCnyPGvlc75FCZvhhNkQsRM0NCjit7dMZOIFzTCn5RFo0FFfkvhwFpI4iz"
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL+EwFyYFEtmbakmPJ4en1n3UcQSkCXL63aJnY6TJvuS1sO/FcG2CIx+2ODk3mM0TE+j5uHQ0jPRUpGZlSh+ADRVhdv9tBIZqdANFngIC1ltJNXfrW8w9KJv9Ak90/bFosdVuxOgL6ytUC6ODc/qYfaaxQ169wPclurxBks1gDKMiSQXOFYOyhIeU6q7tRxIfIcWg6gyioM/YhqJ9XQ9zfD29xU7F+UQNdBz4W6ZrVpkdHxhcnOT36CncVo9oGlvo6fvQ27NJ3VdQK+cMtU5UAXSKUKPdG4HzZ3l8+z2GTt0d9WKXcfQTFfplmOxUW30uzB8viENkvEeWYfly01q11"
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
