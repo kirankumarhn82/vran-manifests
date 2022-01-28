@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: goasite
+  namespace: goasite
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: goasite
+    version: v1beta1
+  clusterName: goasite
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: goasite
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: goasite
+  namespace: goasite
+spec:
+  apiVIP: 9.37.195.16
+  ingressVIP: 9.37.195.17
+  clusterDeploymentRef:
+    name: goasite
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyN0hH0gADYLdzK/vJsiUpCMywNvKTa4hnhzCdCuViWyqNFX2BKW2zuPBVRCHNAHrfA+CjNGFaYlT+zk2K/1qtWWA9vcThODzI0vSjQZTzazXn9ReYTIgtOAsv13UUIPVBSDGSYGL5mWH4u/H+SK273aFgjW2G5c0XE9w1WgsWGeVqPSyszkj9gsFHpcpW4ZTnbf7Eta95wbquhANjPJfd+lZcFJOOK0rbfFTUjejXvdSl+TjGAK9fg4+C+T3wKl+dr5UlUZF72Cs86Bk8l+AForkDXAmqbYc0VBjfob7xb2Hsgkj5xom0TW8WcnlxFjCwNGRYrSUokA1+2c2+5xEt"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: goasite
+  namespace: goasite
+spec:
+  clusterName: goasite
+  clusterNamespace: goasite
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: goasite
+  namespace: goasite
+  
+spec:
+  clusterRef:
+    name: goasite
+    namespace: goasite
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: goasite
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyN0hH0gADYLdzK/vJsiUpCMywNvKTa4hnhzCdCuViWyqNFX2BKW2zuPBVRCHNAHrfA+CjNGFaYlT+zk2K/1qtWWA9vcThODzI0vSjQZTzazXn9ReYTIgtOAsv13UUIPVBSDGSYGL5mWH4u/H+SK273aFgjW2G5c0XE9w1WgsWGeVqPSyszkj9gsFHpcpW4ZTnbf7Eta95wbquhANjPJfd+lZcFJOOK0rbfFTUjejXvdSl+TjGAK9fg4+C+T3wKl+dr5UlUZF72Cs86Bk8l+AForkDXAmqbYc0VBjfob7xb2Hsgkj5xom0TW8WcnlxFjCwNGRYrSUokA1+2c2+5xEt"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-38-std"
+  namespace: goasite
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "goasite"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.38/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: goasite-master-dell-38-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:DA:20
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-39-std"
+  namespace: goasite
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "goasite"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: goasite-master-dell-39-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:94
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-83-std"
+  namespace: goasite
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "goasite"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: goasite-master-dell-83-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---

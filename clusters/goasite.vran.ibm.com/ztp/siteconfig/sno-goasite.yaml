@@ -1,0 +1,100 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "goasite"
+  namespace: "goasite"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyN0hH0gADYLdzK/vJsiUpCMywNvKTa4hnhzCdCuViWyqNFX2BKW2zuPBVRCHNAHrfA+CjNGFaYlT+zk2K/1qtWWA9vcThODzI0vSjQZTzazXn9ReYTIgtOAsv13UUIPVBSDGSYGL5mWH4u/H+SK273aFgjW2G5c0XE9w1WgsWGeVqPSyszkj9gsFHpcpW4ZTnbf7Eta95wbquhANjPJfd+lZcFJOOK0rbfFTUjejXvdSl+TjGAK9fg4+C+T3wKl+dr5UlUZF72Cs86Bk8l+AForkDXAmqbYc0VBjfob7xb2Hsgkj5xom0TW8WcnlxFjCwNGRYrSUokA1+2c2+5xEt"
+  clusters:
+  - clusterName: "goasite"
+    clusterType: "standard"
+    clusterProfile: "du"
+    numMasters: 3
+    numWorkers: 2
+    clusterLabels:
+      common: true
+      sites : "goasite"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    apiVIP: 9.37.195.16
+    ingressVIP: 9.37.195.17
+    nodes:
+       - hostName: "master-dell-38-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.38/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "goasite-master-dell-38-std-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:DA:20"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:DA:20"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:DA:20"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-39-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "goasite-master-dell-39-std-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:94"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:94"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:94"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-83-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "goasite-master-dell-83-std-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:A0:E0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:A0:E0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:A0:E0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
