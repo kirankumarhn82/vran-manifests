@@ -1,6 +1,0 @@
-{
-    "application-name": "banglore-storage",
-    "cluster-name": "phoenixqa4.vran.ibm.com",
-    "cluster-address": "https://api.phoenixqa4.vran.ibm.com:6443",
-    "path": "clusters/phoenixqa4.vran.ibm.com/sites/banglore/configs-storage"
-}
