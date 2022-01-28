@@ -71,6 +71,7 @@ spec:
                  - destination: 9.37.195.64/26
                    next-hop-address: 9.37.195.65
                    next-hop-interface: ens1f0.2024
+                   table-id: 254
        
       
       
