@@ -34,7 +34,7 @@ spec:
          rootDeviceHints:
            deviceName: "/dev/sdb"
          cpuset: "0-1,38-39"
-          nodeNetwork:
+         nodeNetwork:
             interfaces:
             - name: eno1
               macAddress: "E4:43:4B:F1:02:40"
