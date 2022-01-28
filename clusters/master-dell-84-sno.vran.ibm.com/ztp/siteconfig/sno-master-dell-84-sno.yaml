@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC63GueeFecWkHLAcIOYwgj+MD9NwSu5mTVnmPTONYBlfejup4hTjsZYlqMqSvoY8TzKmMTuZqLL/cAMqt6RPoBIkxf8uBmr9Di+bMY4w0DSzH/yTUUx1ktpyQDL9KBPstdkJHEXPdAuLqK5bpnvYNQmGMRPgEaJbrH5WxRFMhL/m1ccc5opLYkeiU2lgSgCzzostvJKZIBDKUTMQqYbwMbGw5QPlDZG8w6e8Ec3cg+c2OdAuuDNHv1FzPB+TmVRr1nm4hR2pQH6m5/yGHJictDYdzmqGvJ7mSK4AhiPI9PUrt36KGBkyTxRxsPchNpVjlk15HUwE3RSr3KCyrKbvEh"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDTDngV/AdTc1ALlWjqUi6SjZ2iu1E/2vZezNSiVCAFeQCgop2hp8/U6vz/qC4a4E4WWqgURsDrhaHxic7YCvQ7V6R/ukMV4qRPC326Gn4Thur7bkYb8axctUuuUM3AkZDg/KZ7NkZOV6/2I/WuTvQWc6sMj4AzwdcPmUfnIw6ziiHC8xpuNvggofAn9EqFc0POrLXZRBDF83Me9J9IwW0X9563IoxE9IixcmRudVXat99A0zUyGk6MriBmv/8WiVBbKaPXpgDmp40eek51PBm20/AByJuJ9gsV46wtm6tlqySzyY5pfEWXCAnDQeSquXzPR6cEdKMrK7y68qxfwLtmjpEJiNCZaCex4D4nHyS4BxHsfpYarGsqUqlAUGEMYrNqrcwzxtRGiiHB6TnCw12JGg6QSaazgpBp/GycEtlrxM4UasAdtH5nJSzgElPJSJTB7zgML7Dwb/SujCmrrT0NWczPjdTZzrF++oo4N13NDQIjng2PyLDR1H9GqJ0oeCPfiKMn7BCBoHxQoo8TQYAp7bd8ayj0jF34ZtIXrkw1yhfS6m9yNaplnV/CeniCJYUmuAov4DiqYfz1JKYh9jZlhjsSABcUw4ocsg0uAw5R53NokEKRB6YQJHLBjuSkfMFbBAVFwxCiXrGr9ECUqAmgdCll5G7k4MJUEskTCkt4xQ== vijjay12@oc3078654033.ibm.com"
   clusters:
   - clusterName: "master-dell-84-sno"
     clusterType: "sno"
@@ -38,6 +38,8 @@ spec:
             interfaces:
             - name: eno1
               macAddress: "E4:43:4B:F1:02:40"
+            - name: ens1f0
+              macAddress: 40:A6:B7:20:D4:B0 
             config:
                interfaces:
                - name: eno1
@@ -49,3 +51,27 @@ spec:
                    dhcp: true
                  ipv6:
                    enabled: false
+               - name: ens1f0.2024
+                 type: vlan
+                 state: up
+                 vlan:
+                   base-iface: ens1f0
+                   id: 2024
+                 ipv4:
+                   enabled: true
+                   dhcp: false
+                   address:
+                   - ip: 9.37.195.90
+                     prefix-length: 26
+                     enabled: true 
+                 ipv6:
+                   enabled: false
+               routes:
+                 config:
+                 - destination: 9.37.195.64/26
+                   next-hop-address: 9.37.195.65
+                   next-hop-interface: ens1f0.2024
+       
+      
+      
+
