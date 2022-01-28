@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: phoenixqa5
+  namespace: phoenixqa5
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: phoenixqa5
+    version: v1beta1
+  clusterName: phoenixqa5
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: phoenixqa5
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: phoenixqa5
+  namespace: phoenixqa5
+spec:
+  apiVIP: 9.37.195.53
+  ingressVIP: 9.37.195.54
+  clusterDeploymentRef:
+    name: phoenixqa5
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKJ0K1CMnrXm3Ti+UD2plUP/eRLukAesQDBZrW57e2ZdIF3f+GXToob+i32YuuNHL8xo3SlOp6oYfN1hAs9xPnS9Yvu5mZkdMzwhZxbuTwb9DB0JpoIfj0bHGPBG1og0zawbSOsd8LJ9akFeEGZrnDpvZDEhgUlX+08YOhEpjSGmojOBUZCEWYQv8TBCridcGWpfIRSPehlelU1BOP+JdrCLeX8sspoSONJ9iv35Me/XgurN5mTaCTQko9vavgFAsplIhegsJptutCdD4/5bVQKTjXFcD9dcI79qO0Vz0XGU9+ZvzyJhZdInnUaKuG8DlEBzbNzrRut1TLifX89qnd"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: phoenixqa5
+  namespace: phoenixqa5
+spec:
+  clusterName: phoenixqa5
+  clusterNamespace: phoenixqa5
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: phoenixqa5
+  namespace: phoenixqa5
+  
+spec:
+  clusterRef:
+    name: phoenixqa5
+    namespace: phoenixqa5
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: phoenixqa5
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKJ0K1CMnrXm3Ti+UD2plUP/eRLukAesQDBZrW57e2ZdIF3f+GXToob+i32YuuNHL8xo3SlOp6oYfN1hAs9xPnS9Yvu5mZkdMzwhZxbuTwb9DB0JpoIfj0bHGPBG1og0zawbSOsd8LJ9akFeEGZrnDpvZDEhgUlX+08YOhEpjSGmojOBUZCEWYQv8TBCridcGWpfIRSPehlelU1BOP+JdrCLeX8sspoSONJ9iv35Me/XgurN5mTaCTQko9vavgFAsplIhegsJptutCdD4/5bVQKTjXFcD9dcI79qO0Vz0XGU9+ZvzyJhZdInnUaKuG8DlEBzbNzrRut1TLifX89qnd"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-80-std"
+  namespace: phoenixqa5
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenixqa5"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenixqa5-master-dell-80-std-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-81-std"
+  namespace: phoenixqa5
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenixqa5"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenixqa5-master-dell-81-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-82-std"
+  namespace: phoenixqa5
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "phoenixqa5"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: phoenixqa5-master-dell-82-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
