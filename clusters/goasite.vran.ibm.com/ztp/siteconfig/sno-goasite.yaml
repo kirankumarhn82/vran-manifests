@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCg1+wUQYYR/uvTAiSWWNVhOQVj9/yBDtEctEfkb3HztxAKuNE5ID6dC83evuIUYyoL26hDaZHOqR15bQzanPYYPscxxP5/aiOJIQnthQX/fHEz+uGECTNeUtie2U23geo+771GcjYCgz+vRgQ3OTJ14ojL1F9bjfgOKcQJWae4Bec2nO3KkE7j5ac//JEKfclJ3Pr7uNCP/Osc93n29skAavansmZBwwRsjHp7jVRLOzhXD2XxAxNp6zWw0nSp3PgRRzXHE/YsAjuv+WEgrZkf3L1n4SrtQRk+xbx0VlobG3/c7mj733vOZc5ssOCIbG451Z8gmelq+4t0+e2UAjP"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsA1usV36oXNEuL694zdkc7JGp0U7oEK02n+BbBDYoujN1sIujFVdPsRPdzavxvXutN1M91YxVpCfggV/o19EVW+5/AzFkz7716U5vN7QtZrFA2xA0dOjAasvKuxjyON+5cJbtYpBKRh5iV2poJC9vEUt3sPO7WLpWqKAbJXFR6rQGY7mn9aJh594hzA6o8W1R5Of91YSQ8rw+fTjqJ1GW/U1/scp2U7qjkDF5G9ikvA1RDYl3pB/O49NcjH12AjERXmJomUkk5n7+Rz/k3l/mAqgNPqiULEqOI703pZ/5GyqAEs8WAEhODj6zwAGzynL10yZ7MoECL3yEyuC1giDZ"
   clusters:
   - clusterName: "goasite"
     clusterType: "standard"
