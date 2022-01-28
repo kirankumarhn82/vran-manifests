@@ -1,0 +1,100 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "phoenixqa4"
+  namespace: "phoenixqa4"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCb30F285dDTq72HIbq+nbb2lh7MEzW5hGqDcZzJv/pAThWVxOxQrX9wmxOHVk8Rt4thENjVXehlSAAuFLhKbvPAtv3hv/XCb4Je2IUR9dOL7PTo2/46o2/eclxW8OsLdJ92QgZXZPeY1jqdj3iP43+QYUdsByEOglePT3uamstxjcKzgbgbmHq2M9Yn0+pwn2t0m1P/f4sOXOBAhfgNAC2yxCvPXnkUwReMLaBXXFIral6VW2NhF25cgEsMOhBOY8SSXpilPXXTFVaToV+vnkcVbel3kbVq9Ni6j/gnAnCh00qLDYGNFZeYNbpUfVSkzCeDYHfERjhA51314P0HZMf"
+  clusters:
+  - clusterName: "phoenixqa4"
+    clusterType: "standard"
+    clusterProfile: "du"
+    numMasters: 3
+    numWorkers: 2
+    clusterLabels:
+      common: true
+      sites : "phoenixqa4"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    apiVIP: 9.37.195.53
+    ingressVIP: 9.37.195.54
+    nodes:
+       - hostName: "master-dell-80-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "phoenixqa4-master-dell-80-std-bmh-secret"
+         bootMACAddress: "E4:43:4B:F0:E3:00"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F0:E3:00"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F0:E3:00"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-81-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "phoenixqa4-master-dell-81-std-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:01:10"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:01:10"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:01:10"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-82-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "phoenixqa4-master-dell-82-std-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:A4:E0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:A4:E0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:A4:E0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
