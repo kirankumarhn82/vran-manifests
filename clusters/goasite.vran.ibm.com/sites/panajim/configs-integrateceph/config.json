@@ -1,0 +1,6 @@
+{
+    "application-name": "panajim-integrateceph",
+    "cluster-name": "goasite.vran.ibm.com",
+    "cluster-address": "https://api.goasite.vran.ibm.com:6443",
+    "path": "clusters/goasite.vran.ibm.com/sites/panajim/configs-integrateceph"
+}
