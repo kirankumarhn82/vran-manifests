@@ -38,6 +38,9 @@ spec:
             interfaces:
             - name: eno1
               macAddress: "E4:43:4B:F1:02:40"
+            - name: ens1f0
+              macAddress: 40:A6:B7:20:D4:B0
+
             config:
                interfaces:
                - name: eno1
@@ -49,3 +52,24 @@ spec:
                    dhcp: true
                  ipv6:
                    enabled: false
+               - name: ens1f0.2024
+                 type: vlan
+                 state: up
+                 vlan:
+                   base-iface: ens1f0
+                   id: 2024
+                 ipv4:
+                   enabled: true
+                   dhcp: false
+                   address:
+                   - ip: 9.37.195.90
+                     prefix-length: 26
+                     enabled: true 
+                 ipv6:
+                   enabled: false
+               routes:
+                 config:
+                 - destination: 9.37.195.64/26
+                   next-hop-address: 9.37.195.65
+                   next-hop-interface: ens1f0.2024
+                   table-id: 254
