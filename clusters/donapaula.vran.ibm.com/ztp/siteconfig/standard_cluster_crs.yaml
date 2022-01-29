@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: donapaula
+  namespace: donapaula
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: donapaula
+    version: v1beta1
+  clusterName: donapaula
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: donapaula
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: donapaula
+  namespace: donapaula
+spec:
+  apiVIP: 9.37.195.16
+  ingressVIP: 9.37.195.17
+  clusterDeploymentRef:
+    name: donapaula
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7sGtfQxiUV21y11aXTNAH0suxSQzR+qrY3eUjtP7eZbWHGiPQDO2IpNtbSnNo1NpJkrjzLTmx5+xq48/CPU/4Me3JEIa3NeFKUPlDac7s+UNa0bH7bd0mO37xeoj5TXOmXouKAoUCWDNvaSI1mXgg/3+swSNKeWX5tAvhFHF3CHZqr1w1ATiLDDmAUfkBlqpL43p/pL0xwf+83JaKwjywdszQvE+MGBAysnfSJaNqpwmR9quXxZIpvAeNJ77I6ZwV1jD6x6qY6fLv/EIS2FwI6WoXVttEOYjCe4M+aPfzwYNEXGV6mJpIDtq+Ns9Mq2Z0e25ZyTEZ7bqxwvX/5HRl"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: donapaula
+  namespace: donapaula
+spec:
+  clusterName: donapaula
+  clusterNamespace: donapaula
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: donapaula
+  namespace: donapaula
+  
+spec:
+  clusterRef:
+    name: donapaula
+    namespace: donapaula
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: donapaula
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7sGtfQxiUV21y11aXTNAH0suxSQzR+qrY3eUjtP7eZbWHGiPQDO2IpNtbSnNo1NpJkrjzLTmx5+xq48/CPU/4Me3JEIa3NeFKUPlDac7s+UNa0bH7bd0mO37xeoj5TXOmXouKAoUCWDNvaSI1mXgg/3+swSNKeWX5tAvhFHF3CHZqr1w1ATiLDDmAUfkBlqpL43p/pL0xwf+83JaKwjywdszQvE+MGBAysnfSJaNqpwmR9quXxZIpvAeNJ77I6ZwV1jD6x6qY6fLv/EIS2FwI6WoXVttEOYjCe4M+aPfzwYNEXGV6mJpIDtq+Ns9Mq2Z0e25ZyTEZ7bqxwvX/5HRl"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-38-std"
+  namespace: donapaula
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "donapaula"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.38/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: donapaula-master-dell-38-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:DA:20
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-39-std"
+  namespace: donapaula
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "donapaula"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: donapaula-master-dell-39-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:94
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-83-std"
+  namespace: donapaula
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "donapaula"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: donapaula-master-dell-83-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---
