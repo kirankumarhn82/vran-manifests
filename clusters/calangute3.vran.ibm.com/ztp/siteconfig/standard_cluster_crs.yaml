@@ -42,7 +42,7 @@ spec:
       hostPrefix: 23
     serviceNetwork:
     - 172.30.0.0/16
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNlBLrtqcQFRtNBGtL3B7T+F6Yy9of95BKzT3DPC+sGUzC6KpZNIz1WjgcW2WkuawQVAFzydLae7YMvu6fcXquvyJdyaUdRw5r6K1CaBaTotBIJCC6grd2hyH8E/VauT2TMjla5H1i/FfZmmAgdOmLZYBdGfOJYNBWh3ZLtUEBwN3xbm8+jTJCHcYZ1FmHAWPiWSfJGUMY7VDUoZXVzS2VQlp9LdeO4fesfNQ5lj3r1BsCHE5v6hbdCnyB9zh/WcPL7PbMSHHDWHQSxinoQBPEbWRe5Q4vMPQcFg38gGd8ZOQmL+1MIQ41K30c+vvZRcSXRSy1M+eFQMd3YE80w/kz"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCilHKiBKdVCSOyAy7pLN7FE2+cwt0j9rgoQkmIo7jBrwZ4dFB6m3UW8zCw3jiV46TZzE3P7sENEtVh9Tm0kxE0kZBuegQl+7mNYSkHSR+8XrCNfLhM1tOuHdW1n4R2f5elrGB+XdLiAYjrAz63BbrLZbIcsbJ7qxqM3ue0jQwOvaLCf+snTkHYCEhrTj7hxmLKWsicP+Gcc7UB2YSlqPCchPOO2sApyEXmxuvRO9hy6u7Y2CgcsrvjL21FDDkerCy1Igbjdbz0Iywz0P+iGL+khFnXUk77o1/quzVC0fd1BHy1CfRJgmYjefZL57aN8c/fYkFZnJK0TNC2H66GsSP9"
 
 ---
 apiVersion: agent.open-cluster-management.io/v1
@@ -83,7 +83,7 @@ spec:
   #     cluster-name: calangute3
   pullSecretRef:
     name: assisted-deployment-pull-secret
-  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNlBLrtqcQFRtNBGtL3B7T+F6Yy9of95BKzT3DPC+sGUzC6KpZNIz1WjgcW2WkuawQVAFzydLae7YMvu6fcXquvyJdyaUdRw5r6K1CaBaTotBIJCC6grd2hyH8E/VauT2TMjla5H1i/FfZmmAgdOmLZYBdGfOJYNBWh3ZLtUEBwN3xbm8+jTJCHcYZ1FmHAWPiWSfJGUMY7VDUoZXVzS2VQlp9LdeO4fesfNQ5lj3r1BsCHE5v6hbdCnyB9zh/WcPL7PbMSHHDWHQSxinoQBPEbWRe5Q4vMPQcFg38gGd8ZOQmL+1MIQ41K30c+vvZRcSXRSy1M+eFQMd3YE80w/kz"
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCilHKiBKdVCSOyAy7pLN7FE2+cwt0j9rgoQkmIo7jBrwZ4dFB6m3UW8zCw3jiV46TZzE3P7sENEtVh9Tm0kxE0kZBuegQl+7mNYSkHSR+8XrCNfLhM1tOuHdW1n4R2f5elrGB+XdLiAYjrAz63BbrLZbIcsbJ7qxqM3ue0jQwOvaLCf+snTkHYCEhrTj7hxmLKWsicP+Gcc7UB2YSlqPCchPOO2sApyEXmxuvRO9hy6u7Y2CgcsrvjL21FDDkerCy1Igbjdbz0Iywz0P+iGL+khFnXUk77o1/quzVC0fd1BHy1CfRJgmYjefZL57aN8c/fYkFZnJK0TNC2H66GsSP9"
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
