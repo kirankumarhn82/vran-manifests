@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC37KDAWcjCWSrgi9xCv4e3aU2h8ClQvqL00C0dyp9uGCBI0e1ReiMlRWJFTPkAP+ZgfhfTodomCEK41XzXuGyizPtaXwbriNwkqI95Ds1soxSXzygCpWMzYWiF5/lS8vUkYg/a7KXeSaJuB8gz1d1hmE/P72gTpCdjhinAAhsWE0bv+gPcosM7EsImHK98DK4BLHSd+YWNj0bo6RuWHPkAor6w/J24TldLiTqdVyU3s/qVPk6+EJ4EPNokMrp0Nlv/ZC7tkZ3rGrcPD72A0huycOsfHsHDqHamPATz3TmrB2pP4lS5BA3BAVxtOg+xf+i0ATAvNE/Hj2EeqBS7/YFB"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOVrkNWYb94ieWtcTsYqxti4DC2yvHY2fAEwPIRbRGqCg4c7QWmAkKTUAZRZXt76Pn2TG8HIPKp/eWxEiuGCx4/eQU/mqfLtYKIHf7Ga3zMkE7xKc1Ozk8JqCE7nqeM2QC436GEzIEOQ04ggl/kdhWizYDNyY1XkAmAS2WFTsJDGwuc/OKXfKXtPPrvjAaiXgBf2qtCyfKWKNSqJ+3i9Ivf6xvFifl4foucC/6npIOSLclhovJiIq8+RGV1DKKE2MBQUqtyjt+A/y/c7HYAKtCKgU5YGkT7BrGpAoGUgetaoo4p8q65a6XBf4M9HRCNGNRTHHar8AfTDNlfDoFsKdz"
   clusters:
   - clusterName: "calangute6"
     clusterType: "standard"
