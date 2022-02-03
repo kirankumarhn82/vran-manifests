@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: calangute6
+  namespace: calangute6
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: calangute6
+    version: v1beta1
+  clusterName: calangute6
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: calangute6
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: calangute6
+  namespace: calangute6
+spec:
+  apiVIP: 9.37.195.31
+  ingressVIP: 9.37.195.12
+  clusterDeploymentRef:
+    name: calangute6
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUB5+w2kXouuhK2gFFPOLOMlcwFjdHZ/VlkrE1+U+2Q25lhlynTwSto/gsxhv/JjW+wI0rSDYHRyr+XzJ0N58p1DSqGudX+3aU3yR0Rq+tmnmY3+QH/nR2+5s/6vD2kZzLXrmpMT1l0dRMcvnubm0M/x8kLRzEr7zOQseVQvuBZz/ScItZjsf6cBeQVdNk/TyGR30ue377Cy7Qw99RRdae1ADDrOArmI1SpALClSu9ur5qshIUiOcctFsaqL96P3adFY4vHhK4qy0cIZ9S6K7FjxFxNu6CGtMYjFBBRkyFc+jPQXjM4RwCTwIHSqi3Errs1qQduGX4XBQBOTTX5UB7"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: calangute6
+  namespace: calangute6
+spec:
+  clusterName: calangute6
+  clusterNamespace: calangute6
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: calangute6
+  namespace: calangute6
+  
+spec:
+  clusterRef:
+    name: calangute6
+    namespace: calangute6
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: calangute6
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUB5+w2kXouuhK2gFFPOLOMlcwFjdHZ/VlkrE1+U+2Q25lhlynTwSto/gsxhv/JjW+wI0rSDYHRyr+XzJ0N58p1DSqGudX+3aU3yR0Rq+tmnmY3+QH/nR2+5s/6vD2kZzLXrmpMT1l0dRMcvnubm0M/x8kLRzEr7zOQseVQvuBZz/ScItZjsf6cBeQVdNk/TyGR30ue377Cy7Qw99RRdae1ADDrOArmI1SpALClSu9ur5qshIUiOcctFsaqL96P3adFY4vHhK4qy0cIZ9S6K7FjxFxNu6CGtMYjFBBRkyFc+jPQXjM4RwCTwIHSqi3Errs1qQduGX4XBQBOTTX5UB7"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-37-std"
+  namespace: calangute6
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "calangute6"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.37/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: calangute6-master-dell-37-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:4C
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-39-std"
+  namespace: calangute6
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "calangute6"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: calangute6-master-dell-39-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:94
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-83-std"
+  namespace: calangute6
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "calangute6"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: calangute6-master-dell-83-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---

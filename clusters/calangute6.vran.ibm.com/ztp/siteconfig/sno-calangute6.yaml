@@ -1,0 +1,100 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "calangute6"
+  namespace: "calangute6"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-2" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUB5+w2kXouuhK2gFFPOLOMlcwFjdHZ/VlkrE1+U+2Q25lhlynTwSto/gsxhv/JjW+wI0rSDYHRyr+XzJ0N58p1DSqGudX+3aU3yR0Rq+tmnmY3+QH/nR2+5s/6vD2kZzLXrmpMT1l0dRMcvnubm0M/x8kLRzEr7zOQseVQvuBZz/ScItZjsf6cBeQVdNk/TyGR30ue377Cy7Qw99RRdae1ADDrOArmI1SpALClSu9ur5qshIUiOcctFsaqL96P3adFY4vHhK4qy0cIZ9S6K7FjxFxNu6CGtMYjFBBRkyFc+jPQXjM4RwCTwIHSqi3Errs1qQduGX4XBQBOTTX5UB7"
+  clusters:
+  - clusterName: "calangute6"
+    clusterType: "standard"
+    clusterProfile: "du"
+    numMasters: 3
+    numWorkers: 2
+    clusterLabels:
+      common: true
+      sites : "calangute6"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    apiVIP: 9.37.195.31
+    ingressVIP: 9.37.195.12
+    nodes:
+       - hostName: "master-dell-37-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.37/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "calangute6-master-dell-37-std-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:4C"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:4C"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:4C"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-39-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "calangute6-master-dell-39-std-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:94"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:94"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:94"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-dell-83-std"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "calangute6-master-dell-83-std-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:A0:E0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:A0:E0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:A0:E0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
