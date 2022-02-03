@@ -1,6 +1,0 @@
-{
-    "application-name": "panajim-integrateceph",
-    "cluster-name": "calangute6.vran.ibm.com",
-    "cluster-address": "https://api.calangute6.vran.ibm.com:6443",
-    "path": "clusters/calangute6.vran.ibm.com/sites/panajim/configs-integrateceph"
-}
