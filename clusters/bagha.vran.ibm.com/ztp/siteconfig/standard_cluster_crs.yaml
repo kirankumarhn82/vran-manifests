@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: bagha
+  namespace: bagha
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: bagha
+    version: v1beta1
+  clusterName: bagha
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: bagha
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: bagha
+  namespace: bagha
+spec:
+  apiVIP: 9.37.195.31
+  ingressVIP: 9.37.195.12
+  clusterDeploymentRef:
+    name: bagha
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-2"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5qXf6QObybpVDF9jfXOO7+dEwjYHzwKUJhmeCYyn5qT00xniTyW+0QP94RCRgchp/5awgE2aURAfvbOHOSTBikCPLZmfnhq4Ynzd0g0ZuNaK5fwByHODemCNfmSdIPOUgxPO2j03NImzEEt/ROn15cQQq63y2s/24Qpq28pU3Hk+Q85gsKaaaXSx5JV6w1t1pW2kiA3rtGiQDK1yBFgXZbXNfjzdWZMP5LSxu2WYAxHYQUysii0KvKK4yDfy6TZYSfOXlzkeflQyPc4Zg09Y5XConu/uGLHmmf1QwmTibNwfMDCEChlumVnVRJ7OtCc3KPPU2Of80ZvwE/GUyptcr"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: bagha
+  namespace: bagha
+spec:
+  clusterName: bagha
+  clusterNamespace: bagha
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: bagha
+  namespace: bagha
+  
+spec:
+  clusterRef:
+    name: bagha
+    namespace: bagha
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: bagha
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5qXf6QObybpVDF9jfXOO7+dEwjYHzwKUJhmeCYyn5qT00xniTyW+0QP94RCRgchp/5awgE2aURAfvbOHOSTBikCPLZmfnhq4Ynzd0g0ZuNaK5fwByHODemCNfmSdIPOUgxPO2j03NImzEEt/ROn15cQQq63y2s/24Qpq28pU3Hk+Q85gsKaaaXSx5JV6w1t1pW2kiA3rtGiQDK1yBFgXZbXNfjzdWZMP5LSxu2WYAxHYQUysii0KvKK4yDfy6TZYSfOXlzkeflQyPc4Zg09Y5XConu/uGLHmmf1QwmTibNwfMDCEChlumVnVRJ7OtCc3KPPU2Of80ZvwE/GUyptcr"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-37-std"
+  namespace: bagha
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "bagha"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.37/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: bagha-master-dell-37-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:4C
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-39-std"
+  namespace: bagha
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "bagha"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: bagha-master-dell-39-std-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:94
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-dell-83-std"
+  namespace: bagha
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "bagha"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: bagha-master-dell-83-std-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---
