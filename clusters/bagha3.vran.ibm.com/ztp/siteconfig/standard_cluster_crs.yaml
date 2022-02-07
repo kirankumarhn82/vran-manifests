@@ -42,7 +42,7 @@ spec:
       hostPrefix: 23
     serviceNetwork:
     - 172.30.0.0/16
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkNaQXwsWrWotodAPgZTE/gRPzSW+kV0f1lwSeJV27VdJoRnL5CxvzcmpN3ZsPjSX0r5TkbwYpgK2shLWHpLspgfgBCZsh8l60kLZQs+7UGoxn2abUZ7FZlRlETl4wcS6OAFP/+5eqdZ3nFfbuTf8iTW89nNJkQzoH2boIWbGNgk3EPz/TFnYLMK8aUEtDXHkea9Y7ed40/SCMQyY9JdIXadASiHB8Nb4mAgv6P+AwazulPaQHBGZ4lywQBPrS6C0YPreu22EyQqDebHN/UuiL1V8ydUi5Lw3aSej3HcdOmR4MqprwzNZnSmXlKx2R2m2xUEi9qQXc2uSZhh+PkJzb"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQF6hYuGmojvkRjKetlEWbxaBVhKeiHa7tMklMedhsYwFe2gFytIdGPvACVorlY15PY1YdNx6WkKezS6wa3dZyDrAF+PE4jPH1X2ZZoLKbdqXEKAIUmPHJwQAXGaNm10kOw3IbwQ/LSJ1adNpRDIZ+MwNIinZlwApRPAnOouvj2HX1+vBQYoY3RQkFHfoo1rxCnDaFguNY97OxPkO94DiZrVJLFR3HUR23GNV4pBMzDK5hDAa3aOmMd0UAqWixd4i20Mt8C/sCWvTc5wxBd9kTq40inO+Paps3/m9yGrAEA6wncXCBY3BQOx9/x3d2Pc1uNXKr2sPQTDcURGtm3zpP"
 
 ---
 apiVersion: agent.open-cluster-management.io/v1
@@ -83,7 +83,7 @@ spec:
   #     cluster-name: bagha3
   pullSecretRef:
     name: assisted-deployment-pull-secret
-  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkNaQXwsWrWotodAPgZTE/gRPzSW+kV0f1lwSeJV27VdJoRnL5CxvzcmpN3ZsPjSX0r5TkbwYpgK2shLWHpLspgfgBCZsh8l60kLZQs+7UGoxn2abUZ7FZlRlETl4wcS6OAFP/+5eqdZ3nFfbuTf8iTW89nNJkQzoH2boIWbGNgk3EPz/TFnYLMK8aUEtDXHkea9Y7ed40/SCMQyY9JdIXadASiHB8Nb4mAgv6P+AwazulPaQHBGZ4lywQBPrS6C0YPreu22EyQqDebHN/UuiL1V8ydUi5Lw3aSej3HcdOmR4MqprwzNZnSmXlKx2R2m2xUEi9qQXc2uSZhh+PkJzb"
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQF6hYuGmojvkRjKetlEWbxaBVhKeiHa7tMklMedhsYwFe2gFytIdGPvACVorlY15PY1YdNx6WkKezS6wa3dZyDrAF+PE4jPH1X2ZZoLKbdqXEKAIUmPHJwQAXGaNm10kOw3IbwQ/LSJ1adNpRDIZ+MwNIinZlwApRPAnOouvj2HX1+vBQYoY3RQkFHfoo1rxCnDaFguNY97OxPkO94DiZrVJLFR3HUR23GNV4pBMzDK5hDAa3aOmMd0UAqWixd4i20Mt8C/sCWvTc5wxBd9kTq40inO+Paps3/m9yGrAEA6wncXCBY3BQOx9/x3d2Pc1uNXKr2sPQTDcURGtm3zpP"
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
