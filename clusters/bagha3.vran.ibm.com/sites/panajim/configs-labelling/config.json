@@ -1,0 +1,6 @@
+{
+    "application-name": "panajim-labelling",
+    "cluster-name": "bagha3.vran.ibm.com",
+    "cluster-address": "https://api.bagha3.vran.ibm.com:6443",
+    "path": "clusters/bagha3.vran.ibm.com/sites/panajim/configs-labelling"
+}
