@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhTSMqvxH3QLqRGtGxwng9cYRxuVOyaFzkWEBbcdkMnfAYYioLi2w3jOO8v1FKDct9yyb/eD9ydUq5eXzkMSGwcjYsTya2hKODtfWVia+S4JB0HoZgrae61h4GwBEVokX1uDPz/ovEa/NqkOviJ4NkxNfkNkrYiFaGABSq5Ca2Ixc0UPyMmlRgYt6CmOL+5WLF19fMtQptxcuxRjTpwvzbOUfbLzv73SXE5x3DCUwTovo1eM6Fn4IezIvWv1B7+AcXBOSAv5nIsWVXPpt6KhTn7+d0inYLUmxO5sx3gP0Wc3EtcajfCcxlGYVxCjmcFRLDbBVFOUc4bQ08q9dGish9"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/1KKRbHndtNum5S25FFB6xZU8kdEUct6kBttgjNEp0152cdjBrmMHVfFq16QKjJdHGWUGP/c8tWaCjOSR7l1NUvFl0igStZYpDb6TK1UE64KibSJ9e+bcSH1kryYXVCf1UHBFA1TM2QT8oOMh4K+OKK2LsGP7nA6b0ecbeq3VSaaQSlBvwd8qBTFeAJUhgJMWLme3Xlmb8hK6A2EKM7Q5wTKc79X8lhhZbkM64rUgNuSmY57YderR+zYybcb1tDwXpDpUNBv9G0i9HAgNGrOHqhDUH1cCDoOiloEYeeGFDPOl6bvjqTXvc6XiAIx87fBq4Tmdi0pn8vDbtXrc7Z7n"
   clusters:
   - clusterName: "master-node-dell42-sno"
     clusterType: "sno"
