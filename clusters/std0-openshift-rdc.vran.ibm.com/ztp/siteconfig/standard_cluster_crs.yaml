@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: std0-openshift-rdc
+  namespace: std0-openshift-rdc
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: std0-openshift-rdc
+    version: v1beta1
+  clusterName: std0-openshift-rdc
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: std0-openshift-rdc
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: std0-openshift-rdc
+  namespace: std0-openshift-rdc
+spec:
+  apiVIP: 9.37.195.53
+  ingressVIP: 9.37.195.54
+  clusterDeploymentRef:
+    name: std0-openshift-rdc
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-1"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqax6+J1uc8FRN5ZlkM81CL074NhlpTR3PGrAuQNBWtY3M10FShO7nNF3WTbiX+iWh31T2o7dBm33PQLXLLF3Coc2q7n8mi/s+w11Ih/WrcE+w6RwyEGcSp/5HQ0Sw5d0Bcv7hI2/mXWQJrpu99Dv+R6Tu2Y5tuq/bUl210LVF7elz+Juce8PSH5xkzKRc3lVe2fg4Yd7ps4ZeGHG5Oa9DrH9YENzv0RyVOBFY5q1ahvabct9JNETuoFXU0TOjtNB0hOaru7NcFrFHRWdIKBOnOku2FtQsqRLnYzRT4RhljO+nkNsAMhU1tRYbGNaZYP8KcjFXubVlEQEItZqaDZA7"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: std0-openshift-rdc
+  namespace: std0-openshift-rdc
+spec:
+  clusterName: std0-openshift-rdc
+  clusterNamespace: std0-openshift-rdc
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: std0-openshift-rdc
+  namespace: std0-openshift-rdc
+  
+spec:
+  clusterRef:
+    name: std0-openshift-rdc
+    namespace: std0-openshift-rdc
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: std0-openshift-rdc
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqax6+J1uc8FRN5ZlkM81CL074NhlpTR3PGrAuQNBWtY3M10FShO7nNF3WTbiX+iWh31T2o7dBm33PQLXLLF3Coc2q7n8mi/s+w11Ih/WrcE+w6RwyEGcSp/5HQ0Sw5d0Bcv7hI2/mXWQJrpu99Dv+R6Tu2Y5tuq/bUl210LVF7elz+Juce8PSH5xkzKRc3lVe2fg4Yd7ps4ZeGHG5Oa9DrH9YENzv0RyVOBFY5q1ahvabct9JNETuoFXU0TOjtNB0hOaru7NcFrFHRWdIKBOnOku2FtQsqRLnYzRT4RhljO+nkNsAMhU1tRYbGNaZYP8KcjFXubVlEQEItZqaDZA7"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "std0-openshift-rdcnode0"
+  namespace: std0-openshift-rdc
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "std0-openshift-rdc"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: std0-openshift-rdc-std0-openshift-rdcnode0-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "std0-openshift-rdcnode1"
+  namespace: std0-openshift-rdc
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "std0-openshift-rdc"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: std0-openshift-rdc-std0-openshift-rdcnode1-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "std0-openshift-rdcnode2"
+  namespace: std0-openshift-rdc
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "std0-openshift-rdc"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: std0-openshift-rdc-std0-openshift-rdcnode2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---
