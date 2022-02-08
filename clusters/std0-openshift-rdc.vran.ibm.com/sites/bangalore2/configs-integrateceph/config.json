@@ -1,6 +1,0 @@
-{
-    "application-name": "bangalore2-integrateceph",
-    "cluster-name": "std0-openshift-rdc.vran.ibm.com",
-    "cluster-address": "https://api.std0-openshift-rdc.vran.ibm.com:6443",
-    "path": "clusters/std0-openshift-rdc.vran.ibm.com/sites/bangalore2/configs-integrateceph"
-}
