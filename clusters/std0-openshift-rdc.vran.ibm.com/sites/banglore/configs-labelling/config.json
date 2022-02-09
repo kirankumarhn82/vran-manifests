@@ -1,0 +1,6 @@
+{
+    "application-name": "banglore-labelling",
+    "cluster-name": "std0-openshift-rdc.vran.ibm.com",
+    "cluster-address": "https://api.std0-openshift-rdc.vran.ibm.com:6443",
+    "path": "clusters/std0-openshift-rdc.vran.ibm.com/sites/banglore/configs-labelling"
+}
