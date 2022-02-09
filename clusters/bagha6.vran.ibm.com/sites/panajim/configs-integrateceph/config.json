@@ -1,0 +1,6 @@
+{
+    "application-name": "panajim-integrateceph",
+    "cluster-name": "bagha6.vran.ibm.com",
+    "cluster-address": "https://api.bagha6.vran.ibm.com:6443",
+    "path": "clusters/bagha6.vran.ibm.com/sites/panajim/configs-integrateceph"
+}
