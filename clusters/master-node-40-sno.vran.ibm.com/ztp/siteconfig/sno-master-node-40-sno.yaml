@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "master-node-40-sno"
+  namespace: "master-node-40-sno"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIeud3ECnGRt/VlQDxovrUnDqmAqe2kdantMn8qbRh9mmNCPIDKp7hanlMbkxzgAxfe82erLxLnmqbpfKvs7x1YEUI0w7HOsaXMSNhTvxdBdiKDvtAZ+/P+1umokV/C7HZE7zx2fHVoB1xgwEFPQH9S6+rMHzuv0JalKBYHeRM9JypnS6x+hiKdX5LZJOCoN46S/dHGa8dmsBf5WpY9MAc648pYrTvdp3AIbHI74V1Rq2atgF87feYi05t78buu4nTF6rGr9z8YlHnD0IuqgOzrbndN1fU7orqD/8S2ODpj4Ef85359k4b1m46L4bkQ51aDMoV5bPGCYGhnLd5paSZ"
+  clusters:
+  - clusterName: "master-node-40-sno"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "master-node-40-sno"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/26
+    nodes:
+       - hostName: "master-node-40-sno"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.40/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "master-node-40-sno-master-node-40-sno-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BD:50"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BD:50"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BD:50"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
