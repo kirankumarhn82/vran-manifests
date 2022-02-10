@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "sno0-openshift-edge"
+  namespace: "sno0-openshift-edge"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1McrNC4J/a7oUqbt8qGyouBTFEGLiR2bJh9zDEuMzLLeGTNjDCr+xuP9QiGLkDNeKJlPDL7G4474tgWQcWb15z8YP0A9cStJo6Z7PecEN76DyLVqnsEM434QtMERiPto9TgI8f9y500A3JaQmGOgDMsNz79swKKprpfKHZPSZcRCTae7TxsgOQgkb9VD97LlSZe+3OzuBXarEg929Mbs9sQSugZpq9cpYCmxK/Wv6xyMCPhm3HwbTHlp8RxpK5Umu095JkB3KN980X3q8d6q+ciufkcUR4dasObgncnKaezrUoTYbc46PLYseD2bN7yOZRIG7DnlVUVj0ggQFL3Qb"
+  clusters:
+  - clusterName: "sno0-openshift-edge"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "sno0-openshift-edge"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "sno0-openshift-edge"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "sno0-openshift-edge-sno0-openshift-edge-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:94"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:94"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:94"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
