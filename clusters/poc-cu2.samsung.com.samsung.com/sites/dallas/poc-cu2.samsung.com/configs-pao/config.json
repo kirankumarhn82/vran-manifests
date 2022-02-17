@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-poc-cu2.samsung.com-pao",
+    "cluster-name": "poc-cu2.samsung.com.samsung.com",
+    "cluster-address": "https://api.poc-cu2.samsung.com.samsung.com:6443",
+    "path": "clusters/poc-cu2.samsung.com.samsung.com/sites/dallas/poc-cu2.samsung.com/configs-pao"
+}
