@@ -11,7 +11,7 @@ spec:
         - key: ran.openshift.io/dallas-local-storage-dell00
           operator: Exists
   storageClassDevices:
-    - storageClassName: dallas-local-storage-dell00
+    - storageClassName: localstorage
       volumeMode: Filesystem
       fsType: xfs 
       devicePaths: 
