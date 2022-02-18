@@ -8,7 +8,7 @@ metadata:
   name: dallas-sriov-vfio-dell00-dell00
   namespace: openshift-sriov-network-operator
 spec:
-  resourceName: "vran_netdevice"
+  resourceName: "cu_sriov_vfs_ens1f0"
   nodeSelector:
     ran.openshift.io/sriov: ""
     ran.openshift.io/dallas-sriov-netdevice-dell00: ""
@@ -20,7 +20,7 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f1#0-7
+          - ens1f0#0-3
     
 ---
 ###############################################################################
@@ -31,7 +31,7 @@ metadata:
   name: dallas-sriov-a-vfio-dell00-dell00
   namespace: openshift-sriov-network-operator
 spec:
-  resourceName: "vran_vfio"
+  resourceName: "f1u"
   nodeSelector:
     ran.openshift.io/sriov: ""
     ran.openshift.io/dallas-sriov-vfio-dell00: ""
@@ -43,5 +43,5 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f1#8-15
+          - ens1f0#4-7
     
