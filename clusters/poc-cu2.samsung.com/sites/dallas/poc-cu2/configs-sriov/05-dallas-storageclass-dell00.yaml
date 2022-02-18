@@ -2,7 +2,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: localstorage
+  name: "dallas-local-storage-dell00"
   labels:
     local.storage.openshift.io/owner-name: dallas-local-storage-dell00
     local.storage.openshift.io/owner-namespace: openshift-local-storage
