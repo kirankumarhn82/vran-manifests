@@ -7,9 +7,9 @@ metadata:
   name: dallas-cu-vfio-sriov-network0
   namespace: openshift-sriov-network-operator
 spec:
-  resourceName: vran_vfio
-  networkNamespace: xnf-5g-cu-dallas
-  vlan: 2024
+  resourceName: f1u
+  networkNamespace: cnf
+  vlan: 2012
   ipam: |-
     {}
   linkState: auto  
@@ -28,9 +28,9 @@ metadata:
   name: dallas-cu-netdevice-sriov-network0
   namespace: openshift-sriov-network-operator
 spec:
-  resourceName: vran_netdevice
-  networkNamespace: xnf-5g-cu-dallas
-  vlan: 2024
+  resourceName: cu_sriov_vfs_ens1f0
+  networkNamespace: cnf
+  vlan: 2006
   ipam: |-
     {}
   linkState: auto  
