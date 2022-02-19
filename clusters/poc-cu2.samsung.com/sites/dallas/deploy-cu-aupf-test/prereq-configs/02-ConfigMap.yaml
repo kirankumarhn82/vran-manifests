@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-bastion-ca
+  namespace: openshift-config
+data:
+  domain.crt: |
+
+    -----BEGIN CERTIFICATE-----
+    MIIENDCCAxygAwIBAgIUcBVSIfzTiJ2CRAXe7PfOdQag93AwDQYJKoZIhvcNAQEL
