@@ -15,7 +15,7 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 64
+  numVfs: 8
   nicSelector:
     vendor: "15b3"
     deviceID: "1015"
@@ -38,7 +38,7 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 64
+  numVfs: 8
   nicSelector:
     vendor: "15b3"
     deviceID: "1015"
