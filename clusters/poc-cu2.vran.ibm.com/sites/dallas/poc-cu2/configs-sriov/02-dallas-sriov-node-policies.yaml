@@ -12,7 +12,7 @@ spec:
   nodeSelector:
     ran.openshift.io/sriov: ""
     ran.openshift.io/dallas-sriov-netdevice-dell00: ""
-  deviceType: netdevice
+  deviceType: vfio-pci
   priority: 10
   #mtu: 1500
   numVfs: 64
@@ -35,7 +35,7 @@ spec:
   nodeSelector:
     ran.openshift.io/sriov: ""
     ran.openshift.io/dallas-sriov-vfio-dell00: ""
-  deviceType: netdevice
+  deviceType: vfio-pci
   priority: 10
   #mtu: 1500
   numVfs: 64
