@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-aupf-test",
-    "cluster-name": "poc-cu2.vran.ibm.com",
-    "cluster-address": "https://api.poc-cu2.vran.ibm.com:6443",
-    "path": "clusters/poc-cu2.vran.ibm.com/sites/dallas/deploy-cu-aupf-test/prereq-configs"
-}
