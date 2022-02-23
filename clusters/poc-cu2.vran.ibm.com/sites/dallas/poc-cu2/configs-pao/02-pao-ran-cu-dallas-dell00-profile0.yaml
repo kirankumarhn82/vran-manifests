@@ -19,4 +19,4 @@ spec:
   numa:
     topologyPolicy: restricted
   nodeSelector:
-    node-role.kubernetes.io/ran-cu-dallas-dell00: ""
+    node-role.kubernetes.io/master: ""
