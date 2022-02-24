@@ -5,7 +5,7 @@
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  name: dallas-sriov-vfio-dell00-server_profile_dell_640
+  name: dallas-sriov-vfio-dell00-server-profile-dell-640
   namespace: openshift-sriov-network-operator
 spec:
   resourceName: "vran_netdevice"
@@ -28,7 +28,7 @@ spec:
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  name: dallas-sriov-a-vfio-dell00-server_profile_dell_640
+  name: dallas-sriov-a-vfio-dell00-server-profile-dell-640
   namespace: openshift-sriov-network-operator
 spec:
   resourceName: "vran_vfio"
