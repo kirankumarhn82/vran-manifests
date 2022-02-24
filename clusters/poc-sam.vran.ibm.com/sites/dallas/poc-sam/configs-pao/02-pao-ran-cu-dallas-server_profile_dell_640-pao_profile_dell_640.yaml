@@ -2,7 +2,7 @@
 apiVersion: performance.openshift.io/v1
 kind: PerformanceProfile
 metadata:
-  name: ran-cu-dallas-server_profile_dell_640-pao_profile_dell_640
+  name: ran-cu-dallas-server-profile-dell-640-pao-profile-dell-640
 spec:
   cpu:
     isolated: "4-38,5-39"
