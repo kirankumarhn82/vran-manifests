@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH/S+irDSYrP9UlhMESqHOPz5HPXyHu+D4ROrqHxqCwW8X3f8Iw82ZFKrJdhPcE56T/VhHAJX7sCEd6jT4rL8GILb/i7E5c21yEM/uDW/pxWSSGqQbzda+wwalcJvs6QWtifBYqdVQR0MFpg8JabBKXy9vG8jKL3SZhE8gGA5JpCl3oysyv6Gx/iE7rKw8YHXAMk3xF7MnbgPkzOXE+FJBETF5fbmnGD8Z0Y+fLEpUGlyiyjQ2npO6sjy+Qgh1ViNrvS9wgIjjgbNirgFzMD3YseM16HRtvhcjvxXIzCurZkR+bZd+8YSbUaeI6Z4AfkoHs5/AMWkOUT16jbc3JxOP"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGyGzOkNwM0QxaxNCjntb0DRht6PYfQSY0jxcYRB2aWR8582fXwNb2U+nVYfj3HTOOnJamtNR/5EIwptVOUBGTVI6f5tfWaDxZ81p7i2WnW30ERPZu9l3E+F3s9W19tF4BEMMhICEQLNkAkOdsg6zr96LXV5gHdYMbUNHKLX8v+RcOFkjZ2LzA6cwASMym+Ge8v0an5P2bYq+DRBp+GyHLWdok1z2hVCR0FM4zoYAYtei8NrVGovFT05DyNjdyWj+1oW57BdClcbzbbCXlGUdAkqh3WkWahlr05rMcWk+QC9ge71FPS5xhfQqph7y1qnXdNVlPLamtLnLf2Vbe7SoZ"
   clusters:
   - clusterName: "poc-sam"
     clusterType: "sno"
