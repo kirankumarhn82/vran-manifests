@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "poc-sam"
+  namespace: "poc-sam"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH/S+irDSYrP9UlhMESqHOPz5HPXyHu+D4ROrqHxqCwW8X3f8Iw82ZFKrJdhPcE56T/VhHAJX7sCEd6jT4rL8GILb/i7E5c21yEM/uDW/pxWSSGqQbzda+wwalcJvs6QWtifBYqdVQR0MFpg8JabBKXy9vG8jKL3SZhE8gGA5JpCl3oysyv6Gx/iE7rKw8YHXAMk3xF7MnbgPkzOXE+FJBETF5fbmnGD8Z0Y+fLEpUGlyiyjQ2npO6sjy+Qgh1ViNrvS9wgIjjgbNirgFzMD3YseM16HRtvhcjvxXIzCurZkR+bZd+8YSbUaeI6Z4AfkoHs5/AMWkOUT16jbc3JxOP"
+  clusters:
+  - clusterName: "poc-sam"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "poc-sam"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "poc-sam.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "poc-sam-poc-sam-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:94"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:94"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:94"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
