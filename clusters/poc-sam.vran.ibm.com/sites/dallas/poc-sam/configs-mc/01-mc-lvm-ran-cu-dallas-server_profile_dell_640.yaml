@@ -2,7 +2,7 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: ran-cu-dallas-server-profile-dell-640-lvs
+  name: ran-cu-dallas-server_profile_dell_640-lvs
   labels:
     machineconfiguration.openshift.io/role: master
 spec:
