@@ -2,7 +2,7 @@
 apiVersion: local.storage.openshift.io/v1
 kind: LocalVolume
 metadata:
-  name: dallas-local-storage-server_profile_dell_640
+  name: dallas-local-storage-server-profile-dell-640
   namespace: openshift-local-storage
 spec:
   nodeSelector:
