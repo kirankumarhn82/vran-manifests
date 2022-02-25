@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-samsung-labelling",
+    "cluster-name": "samsung.vran.ibm.com",
+    "cluster-address": "https://api.samsung.vran.ibm.com:6443",
+    "path": "clusters/samsung.vran.ibm.com/sites/dallas/samsung/configs-labelling"
+}
