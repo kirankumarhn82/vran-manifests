@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "samsung"
+  namespace: "samsung"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd9bLptE9MDQI6nYdIyTy1lvgeFBmETqV1pfVQkcSuWpbczfan134IfHPSSfisbRy7RqR2sxDTjP7MJBhZ7A59MBDmeB+Xca4FUbEp3lkWlyJ9331CROx+bscnewbeHyxh+rm3T4dUTbb8JX4BgcFxm0lSTWkATlyQurRtUzn+5bdo7fjYf6e4Ab6X8+53oTzbtCSDFdaiMAOUbelpztkrS47j8GJCtPCSDFY0OlAkPbDezC9LBnBuBEfid3F5y4+JB3AgY5SaUaqQxyxEXPRuSGVqDl5DKXLUV8MwG6N/mVVC6QG3RoUmEfZA5YEANcAw06NNjdsT7unDq50eiGwH"
+  clusters:
+  - clusterName: "samsung"
+    clusterType: "sno"
+    clusterProfile: "cu"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "samsung"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "samsung.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "samsung-samsung-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:BE:94"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:BE:94"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:BE:94"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
