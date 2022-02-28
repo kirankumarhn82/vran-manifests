@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-dell-sam-poc-sriov",
-    "cluster-name": "dell-sam-poc.vran.ibm.com",
-    "cluster-address": "https://api.dell-sam-poc.vran.ibm.com:6443",
-    "path": "clusters/dell-sam-poc.vran.ibm.com/sites/dallas/dell-sam-poc/configs-sriov"
-}
