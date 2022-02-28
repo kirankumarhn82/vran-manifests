@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-sam-raid0-xnf-pao",
+    "cluster-name": "sam-raid0-xnf.vran.ibm.com",
+    "cluster-address": "https://api.sam-raid0-xnf.vran.ibm.com:6443",
+    "path": "clusters/sam-raid0-xnf.vran.ibm.com/sites/dallas/sam-raid0-xnf/configs-pao"
+}
