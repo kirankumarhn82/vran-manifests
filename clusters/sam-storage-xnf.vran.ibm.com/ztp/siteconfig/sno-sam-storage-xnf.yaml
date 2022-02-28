@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "sam-storage-xnf"
+  namespace: "sam-storage-xnf"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgBAHAYFRHa1Zbh36FIlBxISYARazR1NbtDZ1VljaMjno6C3t1zHNHCYY1T3d6/rsJzmbvoPVg8gt/oO3CIkf1XT9nD7rvvUNqGPhZ13pqsML5SVxe5S/sECQjDZykrOHSAMCJnTM/4W6FpXd1sG54kMEg9OmaxdMukx2I+2Ul9zBhDBu9SgqmeUl7jdySbkcddT/PhbNKnky6OKA5cf0iQ0H/VQecI2X2CZIP+fa8r+3sE5lYigYjdKZbxRb6YQ9B9AaeYGrKzJMV91fDVqT8EiJ2gf3do/QeXK/JTkL+yYEoaU4JVMchYRpoDOQLoQzVVtD+T7gBaGY4isRFv+1X"
+  clusters:
+  - clusterName: "sam-storage-xnf"
+    clusterType: "sno"
+    clusterProfile: "cu"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "sam-storage-xnf"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "sam-storage-xnf.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "sam-storage-xnf-sam-storage-xnf-bmh-secret"
+         bootMACAddress: "E4:43:4B:F0:E3:00"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F0:E3:00"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F0:E3:00"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
