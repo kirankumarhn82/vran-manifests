@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-sam-server-auto-sriov",
+    "cluster-name": "sam-server-auto.vran.ibm.com",
+    "cluster-address": "https://api.sam-server-auto.vran.ibm.com:6443",
+    "path": "clusters/sam-server-auto.vran.ibm.com/sites/dallas/sam-server-auto/configs-sriov"
+}
