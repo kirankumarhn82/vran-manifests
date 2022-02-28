@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-sam-storage-xnf-mc",
-    "cluster-name": "sam-storage-xnf.vran.ibm.com",
-    "cluster-address": "https://api.sam-storage-xnf.vran.ibm.com:6443",
-    "path": "clusters/sam-storage-xnf.vran.ibm.com/sites/dallas/sam-storage-xnf/configs-mc"
-}
