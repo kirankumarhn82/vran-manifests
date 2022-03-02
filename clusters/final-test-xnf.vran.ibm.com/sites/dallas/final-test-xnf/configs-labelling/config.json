@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-final-test-xnf-labelling",
+    "cluster-name": "final-test-xnf.vran.ibm.com",
+    "cluster-address": "https://api.final-test-xnf.vran.ibm.com:6443",
+    "path": "clusters/final-test-xnf.vran.ibm.com/sites/dallas/final-test-xnf/configs-labelling"
+}
