@@ -5,7 +5,7 @@ metadata:
   name: performance-addon-operator
   namespace: openshift-operators
 spec:
-  channel: "4.8"
+  channel: "4.6"
   installPlanApproval: Automatic
   name: performance-addon-operator
   # Modify source name of the catalogsource for air-gapped deployments

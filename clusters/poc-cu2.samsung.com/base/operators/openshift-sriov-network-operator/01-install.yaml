@@ -24,7 +24,7 @@ metadata:
   name: sriov-network-operator-subscription
   namespace: openshift-sriov-network-operator
 spec:
-  channel: "4.8"
+  channel: "4.6"
   installPlanApproval: Automatic
   name: sriov-network-operator
   source: redhat-operators
