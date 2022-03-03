@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-sno-samsung-xnf-pao",
+    "cluster-name": "sno-samsung-xnf.vran.ibm.com",
+    "cluster-address": "https://api.sno-samsung-xnf.vran.ibm.com:6443",
+    "path": "clusters/sno-samsung-xnf.vran.ibm.com/sites/dallas/sno-samsung-xnf/configs-pao"
+}
