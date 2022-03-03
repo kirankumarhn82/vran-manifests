@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-deleteissue-labelling",
+    "cluster-name": "deleteissue.vran.ibm.com",
+    "cluster-address": "https://api.deleteissue.vran.ibm.com:6443",
+    "path": "clusters/deleteissue.vran.ibm.com/sites/dallas/deleteissue/configs-labelling"
+}
