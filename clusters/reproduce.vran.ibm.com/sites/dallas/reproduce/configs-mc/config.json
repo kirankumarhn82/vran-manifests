@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-reproduce-mc",
-    "cluster-name": "reproduce.vran.ibm.com",
-    "cluster-address": "https://api.reproduce.vran.ibm.com:6443",
-    "path": "clusters/reproduce.vran.ibm.com/sites/dallas/reproduce/configs-mc"
-}
