@@ -1,0 +1,206 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: ibmstdlab
+  namespace: ibmstdlab
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: ibmstdlab
+    version: v1beta1
+  clusterName: ibmstdlab
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: ibmstdlab
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: ibmstdlab
+  namespace: ibmstdlab
+spec:
+  apiVIP: 9.37.195.53
+  ingressVIP: 9.37.195.54
+  clusterDeploymentRef:
+    name: ibmstdlab
+  provisionRequirements:
+    controlPlaneAgents: 3
+    workerAgents: 3
+  imageSetRef:
+    name: "img4.9.9-x86-64-appsub"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDa0jRfJbffHN/p5BQ12D4DlqHQS4Mr/8FXGL26qcyiA29lbbck8PXcUAofm4hVZFSgFHttlJMH9SZazU5LB1UVL0os8mbwi972a0OOJOMAoLm6VBP5JGe+B2SSYqOBSMYYYAPcpyXl+tMKxrVwlAm85Ged915MPKmHsA3AD1LsvjSpkUwpAEbgY0JSeTrps8V6L16vuuRL8EZfONzYy1gXMSRaDrE7jt/jAr42rBVVrlCNNm7IZRKoA2Hda/N6JhYGDXtfnS1iPvSJLscJEoLcss9LjmDIPx6vLjm3dxR0LXesXYZYyT5ziyNvJy/pqvDpzR38jmhWXsMQ5UPbsA/J"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: ibmstdlab
+  namespace: ibmstdlab
+spec:
+  clusterName: ibmstdlab
+  clusterNamespace: ibmstdlab
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: ibmstdlab
+  namespace: ibmstdlab
+spec:
+  clusterRef:
+    name: ibmstdlab
+    namespace: ibmstdlab
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: ibmstdlab
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDa0jRfJbffHN/p5BQ12D4DlqHQS4Mr/8FXGL26qcyiA29lbbck8PXcUAofm4hVZFSgFHttlJMH9SZazU5LB1UVL0os8mbwi972a0OOJOMAoLm6VBP5JGe+B2SSYqOBSMYYYAPcpyXl+tMKxrVwlAm85Ged915MPKmHsA3AD1LsvjSpkUwpAEbgY0JSeTrps8V6L16vuuRL8EZfONzYy1gXMSRaDrE7jt/jAr42rBVVrlCNNm7IZRKoA2Hda/N6JhYGDXtfnS1iPvSJLscJEoLcss9LjmDIPx6vLjm3dxR0LXesXYZYyT5ziyNvJy/pqvDpzR38jmhWXsMQ5UPbsA/J"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std1"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std1-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std2"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std3"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std3-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std1"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std1-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std2"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std3"
+  namespace: ibmstdlab
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "ibmstdlab"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: ibmstdlab-ibm-lab-std3-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
