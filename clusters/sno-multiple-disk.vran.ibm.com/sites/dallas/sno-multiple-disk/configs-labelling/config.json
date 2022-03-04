@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-sno-multiple-disk-labelling",
+    "cluster-name": "sno-multiple-disk.vran.ibm.com",
+    "cluster-address": "https://api.sno-multiple-disk.vran.ibm.com:6443",
+    "path": "clusters/sno-multiple-disk.vran.ibm.com/sites/dallas/sno-multiple-disk/configs-labelling"
+}
