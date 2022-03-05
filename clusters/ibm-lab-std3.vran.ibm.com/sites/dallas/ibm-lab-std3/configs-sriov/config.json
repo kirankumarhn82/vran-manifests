@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-ibm-lab-std3-sriov",
+    "cluster-name": "ibm-lab-std3.vran.ibm.com",
+    "cluster-address": "https://api.ibm-lab-std3.vran.ibm.com:6443",
+    "path": "clusters/ibm-lab-std3.vran.ibm.com/sites/dallas/ibm-lab-std3/configs-sriov"
+}
