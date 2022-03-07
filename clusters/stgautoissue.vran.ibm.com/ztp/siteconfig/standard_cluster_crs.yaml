@@ -1,0 +1,206 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: stgautoissue
+  namespace: stgautoissue
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: stgautoissue
+    version: v1beta1
+  clusterName: stgautoissue
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: stgautoissue
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: stgautoissue
+  namespace: stgautoissue
+spec:
+  apiVIP: 9.37.195.53
+  ingressVIP: 9.37.195.54
+  clusterDeploymentRef:
+    name: stgautoissue
+  provisionRequirements:
+    controlPlaneAgents: 3
+    workerAgents: 3
+  imageSetRef:
+    name: "img4.9.9-x86-64-appsub"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh2qwbZOlOZpuV4a2hzUlo8lJ7LpsAZu8eFqJM+XCUcx4khuCLxl3BZqsdyM0ICnAaIMM5c+4hWncnFb+q9UDaLH+iQr9EiCcfiovjTY2/a5km6o5fUZdEQrKg+1/DglBFFwqPI6CoWNrNHoUGQlHKOiyOP8DKmTEKZrOVSZbrID1fyd4agRdg1VzY8qRMSeN/IXU58oGgOOYy/C+tSgmhLB9mCdNjaiWDPz9QAJYIOMq7KiW4JDC8eu87OozA1hRvhWQNZWGmrnFce0qdtSB6ixl80b8BTFkYetUMX0+92a4iKQUx/zHGVGZ0lMpKR9vItqbFW4dvpNj/ziOUmqRV"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: stgautoissue
+  namespace: stgautoissue
+spec:
+  clusterName: stgautoissue
+  clusterNamespace: stgautoissue
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: stgautoissue
+  namespace: stgautoissue
+spec:
+  clusterRef:
+    name: stgautoissue
+    namespace: stgautoissue
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: stgautoissue
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh2qwbZOlOZpuV4a2hzUlo8lJ7LpsAZu8eFqJM+XCUcx4khuCLxl3BZqsdyM0ICnAaIMM5c+4hWncnFb+q9UDaLH+iQr9EiCcfiovjTY2/a5km6o5fUZdEQrKg+1/DglBFFwqPI6CoWNrNHoUGQlHKOiyOP8DKmTEKZrOVSZbrID1fyd4agRdg1VzY8qRMSeN/IXU58oGgOOYy/C+tSgmhLB9mCdNjaiWDPz9QAJYIOMq7KiW4JDC8eu87OozA1hRvhWQNZWGmrnFce0qdtSB6ixl80b8BTFkYetUMX0+92a4iKQUx/zHGVGZ0lMpKR9vItqbFW4dvpNj/ziOUmqRV"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std1"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std1-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std2"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std3"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std3-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std1"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.80/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std1-bmh-secret
+  bootMACAddress: E4:43:4B:F0:E3:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std2"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std3"
+  namespace: stgautoissue
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+  labels:
+    infraenvs.agent-install.openshift.io: "stgautoissue"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stgautoissue-ibm-lab-std3-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
