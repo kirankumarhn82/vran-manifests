@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-labelling",
-    "cluster-name": "stgautoissue.vran.ibm.com",
-    "cluster-address": "https://api.stgautoissue.vran.ibm.com:6443",
-    "path": "clusters/stgautoissue.vran.ibm.com/sites/dallas/configs-labelling"
-}
