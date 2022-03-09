@@ -11,7 +11,7 @@ data:
           metadata:
             name: ocs-prometheus-claim
           spec:
-            storageClassName: ocs-external-storagecluster-ceph-rbd6
+            storageClassName: ocs-external-storagecluster-ceph-rbd
             resources:
               requests:
                 storage: 50Gi
@@ -20,7 +20,7 @@ data:
           metadata:
             name: ocs-alertmanager-claim
           spec:
-            storageClassName: ocs-external-storagecluster-ceph-rbd6
+            storageClassName: ocs-external-storagecluster-ceph-rbd
             resources:
               requests:
                 storage: 40Gi
