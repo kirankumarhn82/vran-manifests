@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-storage",
+    "cluster-name": "stdodftest.vran.ibm.com",
+    "cluster-address": "https://api.stdodftest.vran.ibm.com:6443",
+    "path": "clusters/stdodftest.vran.ibm.com/sites/dallas/configs-storage"
+}
