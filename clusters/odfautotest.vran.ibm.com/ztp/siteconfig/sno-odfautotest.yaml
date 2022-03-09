@@ -1,0 +1,100 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "odfautotest"
+  namespace: "odfautotest"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1+vtGZYgt/L2BCBj+aHVi/holjamxf1v7fws6MWZQaMwJn0OTjTaS06TdAexCCEHB/wOXG72gc8XClQl0bC+vNufTR88Xh113xNShNYQwKzFid6zRw8H1JqxI/jw2kTclk7awVrAOK5qdi5i8gLSyc0Q0OfMwx71mkB6xfdOSn32EhLaUbg5YXH+K9YwY+gwToXyPvy1ZBT9u1yWRZgpg7u2QLMPXQVJd+olge49ADS6QjSXhTFs84W6uNkVrJ12fOnJyg5eFVLMN08w5EpkHwxZdBF2cNUnHP/liaM5HrXonqx6oHoeqLz++1GMOZc66VwIiLBUwAYSc9hyLQFd3"
+  clusters:
+  - clusterName: "odfautotest"
+    clusterType: "standard"
+    clusterProfile: "du"
+    numMasters: 3
+    numWorkers: 2
+    clusterLabels:
+      common: true
+      sites : "odfautotest"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    apiVIP: 9.37.195.53
+    ingressVIP: 9.37.195.54
+    nodes:
+       - hostName: "ibm-lab-std2.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "odfautotest-ibm-lab-std2-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:01:10"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:01:10"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:01:10"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "ibm-lab-std3.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "odfautotest-ibm-lab-std3-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:A4:E0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:A4:E0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:A4:E0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "ibm-lab-std4.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "odfautotest-ibm-lab-std4-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:A0:E0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:A0:E0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:A0:E0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
