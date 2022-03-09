@@ -1,0 +1,148 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: stdodftest
+  namespace: stdodftest
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: stdodftest
+    version: v1beta1
+  clusterName: stdodftest
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: stdodftest
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: stdodftest
+  namespace: stdodftest
+spec:
+  apiVIP: 9.37.195.53
+  ingressVIP: 9.37.195.54
+  clusterDeploymentRef:
+    name: stdodftest
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "img4.9.9-x86-64-appsub"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH8xb06Czecws7VHLR/xiGwmcn0+A1qVyfIPwMI2gfB3nYKRt8v3Zh54QAhekGa1UY803olTZEP2FgJSSrTre0In4I+kQ3bSo8mc2z6MSAY53i3sUWfAP13Fbd0umPBxHuaRxDWMzwlhFMOj3MT56G1wTYuaJqvlRb+zbYwAx1jbliLwLG2oBR8HOsO2kmqxmDkwcTbyUWvxXC+cB0eskBnTHTv452oeJCSx1KTlc3qvAU+Y5/svihTEsHyY+furWzM7VXDrn9aDdca3vtphfWWTiZV+8JmnYAl7gPiJv72ZbW3Wi64Hw2toKzLxfX1gGxU4jr3vTKyP953WFHKDLz"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: stdodftest
+  namespace: stdodftest
+spec:
+  clusterName: stdodftest
+  clusterNamespace: stdodftest
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: stdodftest
+  namespace: stdodftest
+spec:
+  clusterRef:
+    name: stdodftest
+    namespace: stdodftest
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: stdodftest
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH8xb06Czecws7VHLR/xiGwmcn0+A1qVyfIPwMI2gfB3nYKRt8v3Zh54QAhekGa1UY803olTZEP2FgJSSrTre0In4I+kQ3bSo8mc2z6MSAY53i3sUWfAP13Fbd0umPBxHuaRxDWMzwlhFMOj3MT56G1wTYuaJqvlRb+zbYwAx1jbliLwLG2oBR8HOsO2kmqxmDkwcTbyUWvxXC+cB0eskBnTHTv452oeJCSx1KTlc3qvAU+Y5/svihTEsHyY+furWzM7VXDrn9aDdca3vtphfWWTiZV+8JmnYAl7gPiJv72ZbW3Wi64Hw2toKzLxfX1gGxU4jr3vTKyP953WFHKDLz"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std2.vran.ibm.com"
+  namespace: stdodftest
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "ibm-lab-std2.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdodftest"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdodftest-ibm-lab-std2-bmh-secret
+  bootMACAddress: E4:43:4B:F1:01:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std3.vran.ibm.com"
+  namespace: stdodftest
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "ibm-lab-std3.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdodftest"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.82/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdodftest-ibm-lab-std3-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A4:E0
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "ibm-lab-std4.vran.ibm.com"
+  namespace: stdodftest
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "ibm-lab-std4.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdodftest"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.83/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdodftest-ibm-lab-std4-bmh-secret
+  bootMACAddress: E4:43:4B:F1:A0:E0
+  automatedCleaningMode: disabled
+  online: true
+---
