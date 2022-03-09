@@ -1,0 +1,6 @@
+{
+    "application-name": "dallas-storage",
+    "cluster-name": "odfautotest.vran.ibm.com",
+    "cluster-address": "https://api.odfautotest.vran.ibm.com:6443",
+    "path": "clusters/odfautotest.vran.ibm.com/sites/dallas/configs-storage"
+}
