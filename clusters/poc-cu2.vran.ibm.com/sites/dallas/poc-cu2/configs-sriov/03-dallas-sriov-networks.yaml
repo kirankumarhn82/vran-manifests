@@ -1,0 +1,43 @@
+ 
+---
+###############################################################################
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: dallas-cu-vfio-sriov-network0
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio
+  networkNamespace: xnf-5g-cu-dallas
+  vlan: 2012
+  ipam: |-
+    {}
+  linkState: auto  
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>
+
+---
+###############################################################################
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: dallas-cu-netdevice-sriov-network0
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_netdevice
+  networkNamespace: xnf-5g-cu-dallas
+  vlan: 2006
+  ipam: |-
+    {}
+  linkState: auto  
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>
+
