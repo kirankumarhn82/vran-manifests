@@ -1,6 +1,0 @@
-{
-    "application-name": "dallas-poc-cu2-sriov",
-    "cluster-name": "poc-cu2.samsung.com",
-    "cluster-address": "https://api.poc-cu2.samsung.com:6443",
-    "path": "clusters/poc-cu2.samsung.com/sites/dallas/poc-cu2/configs-sriov"
-}
