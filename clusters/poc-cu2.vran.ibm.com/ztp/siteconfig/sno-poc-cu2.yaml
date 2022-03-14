@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "poc-cu2"
+  namespace: "poc-cu2"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDa+An3cnGQUCy8dvo+a76DeiOruumvvUBz/LkM8zY+8zQx4xWN803CwKE941OS2NCeBHjtmNjZAti8v8EODETEh2FTXXAEBMjalD4klDgyhDUwCgvbgeSkyW9jMNOthN+siKsAXyhmInI/kxRNYH3Y1j67883Fxt0sFXA/Som1pG/yNkBujvTQ+MDUH86aR8Ev2an+oij1I2etFmRMKxLQr2vevHf6uKjLJfrQOMM2zdT3SSoAR3jY1xgF1XgallMASGxH0Tu8u0YCwtBwTHfSL4FVjoxK8Cmu4Oj7xqMGkEOCyjIC1Vh3/hI2812xSMgdBS491HSZepHElBuVmRxh"
+  clusters:
+  - clusterName: "poc-cu2"
+    clusterType: "sno"
+    clusterProfile: "cu"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "poc-cu2"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "poc-cu2.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "poc-cu2-poc-cu2-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:01:10"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:01:10"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:01:10"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
