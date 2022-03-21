@@ -9,7 +9,7 @@ spec:
     namespace: testns2
   project: default
   source:
-    path: clusters/platform9/childmanifests
+    path: clusters/platform9/manifests
     repoURL: https://github.com/kirankumarhn82/vran-manifests.git
     targetRevision: main
   syncPolicy:
