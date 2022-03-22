@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-gitops
 spec:
   destination:
-    server: https://9.37.195.36
+    server: https://9.37.195.37
     namespace: testns2
   project: default
   source:
