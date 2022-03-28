@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "sno-server-1"
+  namespace: "sno-server-1"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.9.9-x86-64-appsub" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYW39wcmWc16jznPnIo77QwXJNcalkgSkuiYLZ2JpiL1s4/wgnSi5rpegEI2EpdJ/em+CV7SLFVxIl5Eoc2cppcLiNStqa2b3HLASQi9/D6gPxsYKZIiUSTOp7Afp4Hw6wcO/zzc53LYEZgVLYvJXijq8P/T3xrPKdP7/QlrwLVt9/AvIuBUZq8AUZlRKcB+AQ7TQrwSDFuwkosWPC27bY1xbm7IzQweK7Q6iHDlgj8vydvYWoJzIoDIee8lD+QGRmK+LIHiRcCG2mfcKSDwpzD1VPVMrf+7CNhDbKyu3pfd+4zYCctMYHTayyx9O31poQtJEKcIwBnSAfPb1OHNub"
+  clusters:
+  - clusterName: "sno-server-1"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "sno-server-1"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "sno-server-1.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.81/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "sno-server-1-sno-server-1-bmh-secret"
+         bootMACAddress: "E4:43:4B:F1:01:10"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F1:01:10"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "E4:43:4B:F1:01:10"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
