@@ -1,0 +1,6 @@
+{
+    "application-name": "banashankari-sno-6-sriov",
+    "cluster-name": "sno-6.vran.ibm.com",
+    "cluster-address": "https://api.sno-6.vran.ibm.com:6443",
+    "path": "clusters/sno-6.vran.ibm.com/sites/banashankari/sno-6/configs-sriov"
+}

@@ -1,0 +1,24 @@
+ 
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-netdevice-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: banashankari-sriov-vfio-sm00-supermicro00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: "vran_netdevice"
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/banashankari-sriov-netdevice-supermicro00: ""
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 64
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+          - ens2f0#0-7
+    
